@@ -1,0 +1,10 @@
+# This is a script for the build utility called SCons.
+# It builds the Java code.
+
+env = DefaultEnvironment()
+
+env['JARCHDIR'] = 'classes'
+env['JARFLAGS'] = 'cf'
+
+Java('classes', 'src', JAVACFLAGS=['-g', '-cp', 'gafr/GaFr.jar'])
+Jar(target='Game.jar', source='classes')

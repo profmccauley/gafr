@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>GaFr</title>
+<style>
+body
+{
+  margin: 0;
+}
+canvas
+{
+  padding: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  position: absolute;
+}
+</style>
+</head>
+<body bgcolor="#1a1020" oncontextmenu="return false;">
+<canvas id="canvas" width="100" height="100"></canvas>
+</body>
+<script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
+<script src="gafr/deps/webgl-utils.js"></script>
+<script>
+</script>
+<script src="gafr/deps/gafrjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  gafr_glInit();
+  cheerpjInit();
+  const p = window.location.pathname;
+  const prefix = "/app" + (p.startsWith("/") ? "" : "/")
+                 + p.substring(0, p.lastIndexOf("/")) + "/";
+  cheerpjRunMain("GaFr.GFBoot", prefix+"gafr/GaFr.jar:"+prefix+"Game.jar", prefix, "Game");
+  //cheerpjRunMain("GaFr.GFBoot", prefix+"Game.jar", prefix, "Game");
+</script>
+</html>
