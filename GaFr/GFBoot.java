@@ -23,8 +23,8 @@ public class GFBoot
     //ImageIO.read(new File( resolvePath("minimal/blue_marble1.jpg") ));
     try
     {
-      Class cls = Class.forName(clsname);
-      game = (GFGame)cls.newInstance();
+      Class<?> cls = Class.forName(clsname);
+      game = (GFGame)cls.getDeclaredConstructor().newInstance();
     }
     catch (Exception e)
     {
