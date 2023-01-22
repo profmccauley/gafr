@@ -516,10 +516,11 @@ public class GFJSON
   /** Parses a number. */
   protected Value parseNumber ()
   {
-    boolean neg = maybeEat("-");
-
     // This is not quite to the JSON spec.
     StringBuilder sb = new StringBuilder();
+
+    if (maybeEat("-")) sb.append("-");
+
     while (true)
     {
       int d = front();
@@ -582,7 +583,7 @@ public class GFJSON
       {
         int f = front();
         ++cur;
-        switch (front())
+        switch (f)
         {
           case '"':
             sb.append('"');
