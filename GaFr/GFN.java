@@ -1,5 +1,4 @@
 package GaFr;
-import GaFr.Gl;
 
 /** Internal use.
   *

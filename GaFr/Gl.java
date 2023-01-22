@@ -1,7 +1,4 @@
 package GaFr;
-import GaFr.GFBoot;
-
-import GaFr.GFU;
 
 /** Low-level graphics (WebGL) stuff.
   *

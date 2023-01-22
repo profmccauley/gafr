@@ -1,6 +1,5 @@
 package GaFr;
 import java.util.Arrays;
-import GaFr.GFKey;
 
 /** This class contains information on which keys are currently down.
   */

@@ -1,7 +1,5 @@
 package GaFr;
 import java.util.Arrays;
-import GaFr.Gl;
-import GaFr.GFJSON;
 
 /** A class for drawing image-based fonts
   *

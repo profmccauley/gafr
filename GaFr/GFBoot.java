@@ -1,8 +1,4 @@
 package GaFr;
-import GaFr.GFGame;
-import GaFr.GFN;
-import GaFr.GFKeyboard;
-
 import java.io.IOException;
 
 /** Internal use. */

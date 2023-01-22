@@ -1,8 +1,6 @@
 package GaFr;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 
 /**
   * A texture.

@@ -1,7 +1,4 @@
 package GaFr;
-import GaFr.GFU;
-import GaFr.Gl;
-import GaFr.GFBoot;
 import static GaFr.GFU.*;
 
 /** An image which can be drawn to the screen.

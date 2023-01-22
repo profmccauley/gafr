@@ -1,6 +1,5 @@
 package GaFr;
 import java.util.Arrays;
-import GaFr.GFN;
 import java.util.ArrayList;
 
 /** Gamepad access.
