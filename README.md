@@ -135,6 +135,9 @@ Here are a few ideas of new features that you could add:
   or as a [GUI](https://github.com/crashinvaders/gdx-texture-packer-gui)) and
   [Spine](http://en.esotericsoftware.com/spine-atlas-format)
 - A 2D scene graph
+- Fix psf\_to\_ffont so that it outs "squarer" textures instead of really
+  wide ones (which are sometimes too wide to be loaded into a texture) by
+  not putting all the characters on the same "line".
 - Variable-width fonts, possibly using the format used by
   [libGDX's Hiero utility](https://libgdx.com/wiki/tools/hiero)
 - Text measurement
