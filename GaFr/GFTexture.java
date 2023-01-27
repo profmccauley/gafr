@@ -1,5 +1,6 @@
 package GaFr;
 import java.awt.image.BufferedImage;
+import java.awt.Image;
 import javax.imageio.ImageIO;
 
 /**
@@ -19,6 +20,8 @@ import javax.imageio.ImageIO;
   */
 public class GFTexture
 {
+  public static final int MAX_TEXTURE_SIZE = GFN.gl_getParameter(Gl.MAX_TEXTURE_SIZE);
+
   // Texture coordinates in pixel coordinates
   public int u0, v0, u1, v1;
 
@@ -75,6 +78,23 @@ public class GFTexture
       throw new RuntimeException(e);
     }
 
+    width = img.getWidth();
+    height = img.getHeight();
+
+    if (width > MAX_TEXTURE_SIZE || height > MAX_TEXTURE_SIZE)
+    {
+      // This will result in a loss of quality, but oh well!
+      int ww = Math.min(img.getWidth(), MAX_TEXTURE_SIZE);
+      int hh = Math.min(img.getHeight(), MAX_TEXTURE_SIZE);
+      GFU.log("Warning: Texture size ",img.getWidth(),"x",img.getHeight(),
+              " is too large; rescaling to ",ww,"x",hh,".");
+      //TODO: The above should probably be GFU.warn().
+      BufferedImage scaled = new BufferedImage(ww, hh, img.getType());
+      scaled.createGraphics().drawImage(img, 0, 0, ww, hh, null);
+      //TODO: .dispose() the Graphics2D instance
+      img = scaled;
+    }
+
     int[] pix = img.getRGB(0,0, img.getWidth(), img.getHeight(), null, 0, img.getWidth());
     if (inColor != outColor)
     {
@@ -84,9 +104,7 @@ public class GFTexture
       }
     }
     u0 = 0; v0 = 0;
-    u1 = img.getWidth(); v1 = img.getHeight();
-    width = img.getWidth();
-    height = img.getHeight();
+    u1 = width; v1 = height;
 
     GFN.gl_createTexture(this);
 

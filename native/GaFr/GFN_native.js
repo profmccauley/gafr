@@ -121,3 +121,7 @@ function _CHEERPJ_COMPRESS(ZN4GaFr3GFN9initEarlyEVEV)(p)
 {
   return gafr_initEarly();
 }
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN15gl_getParameterEIEI)(a0,p)
+{
+  return gl.getParameter(a0);
+}

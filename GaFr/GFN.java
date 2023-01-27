@@ -24,6 +24,7 @@ public class GFN
 
   public static native int gl_getUniformLocation (Gl.Program p, String name);
   public static native int gl_getAttributeLocation (Gl.Program p, String name);
+  public static native int gl_getParameter (int pname);
   public static native void gl_uniform2f (int loc, float f1, float f2);
   public static native void gl_uniform1i (int loc, int i);
   public static native void gl_useProgram (Gl.Program p);
