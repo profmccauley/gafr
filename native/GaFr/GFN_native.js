@@ -117,3 +117,7 @@ function _CHEERPJ_COMPRESS(ZN4GaFr3GFN8setTitleEN4java4lang6StringEV)(a0,p)
 {
   return gafr_setTitle(a0);
 }
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN9initEarlyEVEV)(p)
+{
+  return gafr_initEarly();
+}

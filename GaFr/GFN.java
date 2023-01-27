@@ -7,6 +7,7 @@ package GaFr;
   */
 public class GFN
 {
+  public static native void initEarly ();
   public static native void begin (Object o, int width, int height);
   public static native void consoleLogObj (Object o);
   public static native void debugSet (Object o);

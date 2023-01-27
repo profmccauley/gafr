@@ -17,9 +17,32 @@ canvas
   display: block;
   position: absolute;
 }
+#spinner
+{
+  border: 16px solid #6611aa;
+  border-top: 16px solid #331188;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+
+  padding: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  position: absolute;
+}
+@keyframes spin
+{
+  100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body bgcolor="#1a1020" oncontextmenu="return false;">
+<div id="spinner"></div>
 <canvas id="canvas" width="100" height="100"></canvas>
 </body>
 <script src="https://cjrtnc.leaningtech.com/2.3/loader.js"></script>
@@ -34,7 +57,14 @@ canvas
   const p = window.location.pathname;
   const prefix = "/app" + (p.startsWith("/") ? "" : "/")
                  + p.substring(0, p.lastIndexOf("/")) + "/";
-  cheerpjRunMain("GaFr.GFBoot", prefix+"gafr/GaFr.jar:"+prefix+"Game.jar", prefix, "Game");
-  //cheerpjRunMain("GaFr.GFBoot", prefix+"Game.jar", prefix, "Game");
+  try
+  {
+    cheerpjRunMain("GaFr.GFBoot", prefix+"gafr/GaFr.jar:"+prefix+"Game.jar", prefix, "Game");
+    //cheerpjRunMain("GaFr.GFBoot", prefix+"Game.jar", prefix, "Game");
+  }
+  catch (e)
+  {
+    gafr_initFail();
+  }
 </script>
 </html>

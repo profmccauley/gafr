@@ -43,9 +43,26 @@ function gafr_redraw (timestamp)
 function gafr_begin (o, w, h)
 {
   console.log("gafr_begin()");
-  gafr_jsInit(w, h);
+  gafr_jsInit(w, h).then(gafr_jsInitDone).catch(gafr_initFail);
 }
 
+function gafr_jsInitDone ()
+{
+  console.log("gafr_jsInitDone()");
+  document.getElementById("spinner").style.visibility = "hidden";
+}
+
+async function gafr_initEarly ()
+{
+  console.log("gafr_initEarly()");
+  document.getElementById("spinner").style.borderBottom = "16px solid #331188";
+}
+
+function gafr_initFail ()
+{
+  console.log("gafr_initFail()");
+  document.getElementById("spinner").style.border = "16px solid #ff2020";
+}
 
 function gafr_null () { }
 

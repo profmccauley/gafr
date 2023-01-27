@@ -10,6 +10,8 @@ public class GFBoot
 
   public static void main (String[] args) throws IOException
   {
+    GFN.initEarly();
+
     basePath = args[0];
     if (!basePath.endsWith("/")) basePath += "/";
 
@@ -34,7 +36,6 @@ public class GFBoot
     }
 
     GFN.begin(game, game.WIDTH, game.HEIGHT);
-
   }
 
   public static String resolvePath (String fileName)
