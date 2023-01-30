@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.ByteArrayInputStream;
 import java.util.Random;
+import java.util.Iterator;
 
 /** A utility library for odds and ends.
   *
@@ -230,5 +231,66 @@ public class GFU
   public static int randint (int lo, int hi)
   {
     return random.nextInt(hi-lo+1) + lo;
+  }
+
+  /** A generic iterator for 2D arrays.
+    *
+    * It can be nice to be able just iterate over each element of
+    * a 2D array.  This lets us do so like...
+    *
+    *     Foo[][] foos = getFoos();
+    *     for (Foo f : new Iter2D<>(foos))
+    *        System.out.println( f.toString() );
+    */
+  public static class Iter2D<T> implements Iterable<T>
+  {
+    T[][] array;
+    public Iter2D (T[][] array)
+    {
+      this.array = array;
+    }
+
+    public Iterator<T> iterator ()
+    {
+      return new Iterator2D(array);
+    }
+  }
+
+  /** Iterable for 2D arrays.
+    *
+    * This is largely intended to be used with Iter2D.
+    */
+  public static class Iterator2D<T> implements Iterator<T>
+  {
+    int i, j;
+    int count; // Total elements
+    T[][] array;
+
+    public Iterator2D (T[][] array)
+    {
+      this.array = array;
+
+      // This isn't very smart, but the way we know whether we have any
+      // elements left at present is to just count them all ahead of
+      // time and subtract.  We could do better.
+      for (int k = 0; k < this.array.length; ++k)
+        count += this.array[k].length;
+    }
+
+    public T next ()
+    {
+      while (i >= this.array.length)
+      {
+        i = 0;
+        ++j;
+      }
+      --count;
+      return this.array[i++][j];
+    }
+
+    public boolean hasNext ()
+    {
+      return count > 0;
+    }
   }
 }
