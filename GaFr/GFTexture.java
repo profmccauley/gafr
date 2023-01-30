@@ -1,6 +1,5 @@
 package GaFr;
 import java.awt.image.BufferedImage;
-import java.awt.Image;
 import javax.imageio.ImageIO;
 
 /**
@@ -233,4 +232,3 @@ public class GFTexture
     //GFU.log("activated texture ", currentIndex);
   }
 }
-
