@@ -12,7 +12,7 @@ import java.util.Arrays;
   */
 public class GFFont
 {
-  protected GFStamp[] charMap;
+  public GFStamp[] glyphMap;
   protected GFStamp replacementGlyph = null;
 
   public float lineHeight; ///< Space between lines
@@ -59,10 +59,10 @@ public class GFFont
 
     if (!json.has("charmap") || json.get("charmap").isNull())
     {
-      charMap = new GFStamp[json.get("count", GFJSON.create(256)).asInt()];
-      for (int i = 0; i < charMap.length; ++i)
+      glyphMap = new GFStamp[json.get("count", GFJSON.create(256)).asInt()];
+      for (int i = 0; i < glyphMap.length; ++i)
       {
-        charMap[i] = glyphs[i];
+        glyphMap[i] = glyphs[i];
       }
     }
     else
@@ -73,12 +73,12 @@ public class GFFont
         int ch = v.get(0).asInt();
         if (ch > max) max = ch;
       }
-      charMap = new GFStamp[max+1];
+      glyphMap = new GFStamp[max+1];
       for (GFJSON.Value v : json.get("charmap").asArray())
       {
         int ch = v.get(0).asInt();
         int gl = v.get(1).asInt();
-        charMap[ch] = glyphs[gl];
+        glyphMap[ch] = glyphs[gl];
       }
     }
   }
@@ -123,10 +123,10 @@ public class GFFont
     {
       if (chars.charAt(i) > maxchar) maxchar = chars.charAt(i);
     }
-    charMap = new GFStamp[maxchar+1];
+    glyphMap = new GFStamp[maxchar+1];
     for (int i = 0; i < chars.length(); ++i)
     {
-      charMap[chars.charAt(i)] = glyphs[i];
+      glyphMap[chars.charAt(i)] = glyphs[i];
       if (glyphs[i].height > lineHeight) lineHeight = glyphs[i].height;
     }
     initReplacement();
@@ -142,14 +142,14 @@ public class GFFont
     */
   public GFFont collapseCase ()
   {
-    if (charMap.length <= 'z')
-      charMap = Arrays.copyOf(charMap, 'z'+1);
+    if (glyphMap.length <= 'z')
+      glyphMap = Arrays.copyOf(glyphMap, 'z'+1);
 
     for (int l = 'A'; l < 'Z'; ++l)
     {
       int u = l + 32;
-      if (charMap[l] == null) charMap[l] = charMap[u];
-      else if (charMap[u] == null) charMap[u] = charMap[l];
+      if (glyphMap[l] == null) glyphMap[l] = glyphMap[u];
+      else if (glyphMap[u] == null) glyphMap[u] = glyphMap[l];
     }
 
     return this;
@@ -158,8 +158,8 @@ public class GFFont
   /** Tries to set up a replacement glyph for missing chracters. */
   protected boolean tryReplacement (int c)
   {
-    if (c >= charMap.length) return false;
-    GFStamp s = charMap[c];
+    if (c >= glyphMap.length) return false;
+    GFStamp s = glyphMap[c];
     if (s == null) return false;
     replacementGlyph = s;
     return true;
@@ -190,13 +190,13 @@ public class GFFont
         continue;
       }
       GFStamp g;
-      if (c >= charMap.length)
+      if (c >= glyphMap.length)
       {
         g = replacementGlyph;
       }
       else
       {
-        g = charMap[c];
+        g = glyphMap[c];
         if (g == null) g = replacementGlyph;
       }
       if (g == null) continue;
