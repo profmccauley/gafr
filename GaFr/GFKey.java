@@ -23,8 +23,9 @@ public class GFKey
 
   public static final int AltLeft = 136;
   public static final int AltRight = 137;
-  public static final int ArrowDown = 131;
+  public static final int ArrowDown = 129;
   public static final int ArrowLeft = 130;
+  public static final int ArrowRight = 131;
   public static final int ArrowUp = 128;
   public static final int Backquote = 96;
   public static final int Backslash = 92;

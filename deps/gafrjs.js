@@ -539,7 +539,7 @@ function gafr_keyConvert (code)
       return 129;
     case "ArrowLeft":
       return 130;
-    case "ArrowDown":
+    case "ArrowRight":
       return 131;
     case "ShiftLeft":
       return 132;

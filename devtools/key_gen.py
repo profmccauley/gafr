@@ -7,7 +7,7 @@ A sloppy script for generating key code source files
 keys = """ArrowUp
 ArrowDown
 ArrowLeft
-ArrowDown
+ArrowRight
 ShiftLeft
 ShiftRight
 ControlLeft
