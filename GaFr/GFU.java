@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.ByteArrayInputStream;
+import java.util.Random;
 
 /** A utility library for odds and ends.
   *
@@ -13,6 +14,8 @@ import java.io.ByteArrayInputStream;
   */
 public class GFU
 {
+  protected static Random random = new Random();
+
   public static String resolvePath (String fileName)
   {
     return GFBoot.resolvePath(fileName);
@@ -215,5 +218,17 @@ public class GFU
     int l = string.lastIndexOf(delim);
     if (l == -1) return "";
     return string.substring(l+1);
+  }
+
+  /** Returns a random number.
+   *
+   * @param lo     The lower bound
+   * @param hi     The upper bound
+   *
+   * The return value is between [lo,hi].
+   */
+  public static int randint (int lo, int hi)
+  {
+    return random.nextInt(hi-lo+1) + lo;
   }
 }
