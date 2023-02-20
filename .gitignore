@@ -2,6 +2,8 @@
 *.jar
 *.jar.js
 .*
+*.patch
+*.diff
 fonts
 doc
 doxygen-awesome-css
