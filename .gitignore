@@ -8,3 +8,5 @@ fonts
 doc
 doxygen-awesome-css
 native_stubs
+numberizer/target
+dependency-reduced-pom.xml
