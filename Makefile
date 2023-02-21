@@ -45,6 +45,9 @@ doxygen-awesome-css:
 	git clone https://github.com/jothepro/doxygen-awesome-css
 	git -C doxygen-awesome-css checkout a13955ef815dc31c52d0c6a32c52a850f0f7c6f6
 
+numberizer/target/numberizer-1.0-SNAPSHOT-shaded.jar:
+	@mvn -f numberizer install
+
 .PHONY: doc
 doc: doxygen-awesome-css
 	@doxygen
@@ -53,7 +56,7 @@ doc: doxygen-awesome-css
 .PHONY: clean
 clean:
 	@rm -f GaFrNat.jar GaFrNat.jar.js GaFr.jar GaFr.jar.js
-	@rm -rf classes native_stubs fonts/spleen
+	@rm -rf classes native_stubs numberizer/target numberizer/*-pom.xml
 	@scons -c
 
 .PHONY: cleanall
