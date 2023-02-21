@@ -30,8 +30,7 @@ public class GFBoot
     }
     catch (Exception e)
     {
-      GFU.log("Exception while instantiating Game: " + e);
-      GFU.log(GFU.getStackTrace(e));
+      GFST.printStackTrace(e, "Exception instantiating main class " + clsname);
       throw new RuntimeException(e);
     }
 

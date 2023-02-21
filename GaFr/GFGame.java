@@ -122,8 +122,7 @@ public class GFGame
     }
     catch (Exception e)
     {
-      GFU.log("In onDraw(): ", e);
-      GFU.log(GFU.getStackTrace(e));
+      GFST.printStackTrace(e, "In onDraw()");
     }
     _stampManager.flush();
   }

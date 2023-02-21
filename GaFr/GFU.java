@@ -2,8 +2,6 @@ package GaFr;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.io.ByteArrayInputStream;
 import java.util.Random;
 import java.util.Iterator;
@@ -67,14 +65,6 @@ public class GFU
   public static float cosf (float a) { return (float)Math.cos(a); }
   /** Float version of sin(). */
   public static float sinf (float a) { return (float)Math.sin(a); }
-
-  /** Get a stack trace for an exception as a String. */
-  public static String getStackTrace (Throwable e)
-  {
-    StringWriter sw = new StringWriter();
-    e.printStackTrace(new PrintWriter(sw));
-    return sw.toString();
-  }
 
   /** Wraps value into a range.
     * lo should be less than hi.
