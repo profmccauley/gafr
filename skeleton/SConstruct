@@ -6,5 +6,7 @@ env = DefaultEnvironment()
 env['JARCHDIR'] = 'classes'
 env['JARFLAGS'] = 'cf'
 
-Java('classes', 'src', JAVACFLAGS=['-g', '-cp', 'gafr/GaFr.jar'])
+cp = ARGUMENTS.get('gfcp', 'gafr/GaFr.jar')
+
+Java('classes', 'src', JAVACFLAGS=['-g', '-cp', cp])
 Jar(target='Game.jar', source='classes')
