@@ -141,6 +141,11 @@ function gafr_onKeyUp (ev)
   gafrj_onKeyUp(ev.key, gafr_keyConvert(ev.code), gafr_getModFlags(ev));
 }
 
+function gafr_isDebugOn ()
+{
+ return window.location.hash.indexOf("debug") >= 0;
+}
+
 async function gafr_jsInit (width, height)
 {
   console.log("gafr_jsInit() started");

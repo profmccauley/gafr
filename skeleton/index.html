@@ -61,10 +61,19 @@ canvas
   const p = window.location.pathname;
   const prefix = "/app" + (p.startsWith("/") ? "" : "/")
                  + p.substring(0, p.lastIndexOf("/")) + "/";
+  var gjar = prefix;
+  var fjar = prefix + "gafr/";
+  if (gafr_isDebugOn())
+  {
+    gjar += "debug/";
+    fjar += "debug/";
+    console.info("%c%s", "color:blue", "Loading debug version");
+  }
+  gjar += "Game.jar";
+  fjar += "GaFr.jar";
   try
   {
-    cheerpjRunMain("GaFr.GFBoot", prefix+"gafr/GaFr.jar:"+prefix+"Game.jar", prefix, "Game");
-    //cheerpjRunMain("GaFr.GFBoot", prefix+"Game.jar", prefix, "Game");
+    cheerpjRunMain("GaFr.GFBoot", fjar + ":" + gjar, prefix, "Game");
   }
   catch (e)
   {
