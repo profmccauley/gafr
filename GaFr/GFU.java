@@ -13,8 +13,10 @@ import java.util.Iterator;
   */
 public class GFU
 {
+  /** Default random number generator. */
   protected static Random random = new Random();
 
+  /** Makes the given path relative to the project base directory. */
   public static String resolvePath (String fileName)
   {
     return GFBoot.resolvePath(fileName);
