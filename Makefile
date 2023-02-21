@@ -48,6 +48,18 @@ doxygen-awesome-css:
 numberizer/target/numberizer-1.0-SNAPSHOT-shaded.jar:
 	@mvn -f numberizer install
 
+debug/GaFr/%.java: GaFr/%.java
+	devtools/numberizer.sh --root=GaFr --out=debug/GaFr --prefix=GaFr. --skip=GFST.java --skip=GFU.java $(patsubst GaFr/%,%,$(SOURCES))
+
+debug/GaFr.jar: $(addprefix debug/,$(SOURCES)) native/GaFr/GFN_native.js
+	@scons -f $(shell pwd)/SConstruct -C debug
+
+debug/GaFr.jar.js: debug/GaFr.jar native/GaFr/GFN_native.js native_stubs/GaFr/GFN_native.js
+	@cheerpjfy --natives=native debug/GaFr.jar
+
+.PHONY: debug
+debug: $(addprefix debug/,$(SOURCES)) debug/GaFr.jar.js
+
 .PHONY: doc
 doc: doxygen-awesome-css
 	@doxygen
@@ -56,7 +68,7 @@ doc: doxygen-awesome-css
 .PHONY: clean
 clean:
 	@rm -f GaFrNat.jar GaFrNat.jar.js GaFr.jar GaFr.jar.js
-	@rm -rf classes native_stubs numberizer/target numberizer/*-pom.xml
+	@rm -rf classes native_stubs numberizer/target numberizer/*-pom.xml debug
 	@scons -c
 
 .PHONY: cleanall
