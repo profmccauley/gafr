@@ -47,13 +47,35 @@ public class GFU
     return new ByteArrayInputStream(loadDataFile(fileName));
   }
 
-  /** Log a message for debugging purposes. */
+  /** Log a message for debugging purposes.
+    *
+    * Unlike logs(), it does not put spaces between items.
+    *
+    * @see GFU#logs
+    **/
   public static void log (Object... args)
   {
     String s = "";
     for (Object o : args)
     {
       //if (s.length() != 0) s += " ";
+      s += o.toString();
+    }
+    System.out.print(s);
+  }
+
+  /** Log a message for debugging purposes.
+    *
+    * Unlike log(), it puts spaces between items.
+    *
+    * @see GFU#log
+    **/
+  public static void logs (Object... args)
+  {
+    String s = "";
+    for (Object o : args)
+    {
+      if (s.length() != 0) s += " ";
       s += o.toString();
     }
     System.out.print(s);
