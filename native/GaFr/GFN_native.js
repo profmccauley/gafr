@@ -105,6 +105,18 @@ function _CHEERPJ_COMPRESS(ZN4GaFr3GFN9playSoundEN4GaFr7GFSoundEV)(a0,p)
 {
   a0._gafrx_id.play();
 }
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN9setVolumeEN4GaFr7GFSoundFEV)(a0,a1,p)
+{
+  a0._gafrx_id.volume(a1);
+}
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN10pauseSoundEN4GaFr7GFSoundEV)(a0,p)
+{
+  a0._gafrx_id.pause();
+}
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN9stopSoundEN4GaFr7GFSoundEV)(a0,p)
+{
+  a0._gafrx_id.stop();
+}
 function _CHEERPJ_COMPRESS(ZN4GaFr3GFN14getGamepadDataEIAFAZAIEZ)(a0,a1,a2,a3,p)
 {
   return gafr_getGamepadData(a0, a1, a2, a3);

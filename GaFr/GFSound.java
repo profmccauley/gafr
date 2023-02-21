@@ -34,4 +34,29 @@ public class GFSound
   {
     GFN.playSound(this);
   }
+
+  /** Change the sound volume.
+    * Takes a float from 1.0 to 0.0 (mute).
+    * Useful for muting and unmuting.
+    */
+  public void volume (float vol)
+  {
+    GFN.setVolume(this, vol);
+  }
+
+  /** Pause the sound.
+    * The song will resume playback from this point if played again.
+    */
+  public void pause ()
+  {
+    GFN.pauseSound(this);
+  }
+
+  /** Stop the sound.
+    * The sound will resume playback from the beginning if played again.
+    */
+  public void stop ()
+  {
+    GFN.stopSound(this);
+  }
 }

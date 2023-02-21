@@ -41,6 +41,9 @@ public class GFN
 
   public static native void loadSound (GaFr.GFSound sound, byte[] data, String mime);
   public static native void playSound (GaFr.GFSound sound);
+  public static native void setVolume (GaFr.GFSound sound, float volume);
+  public static native void pauseSound (GaFr.GFSound sound);
+  public static native void stopSound (GaFr.GFSound sound);
 
   public static native boolean getGamepadData (int index, float[] axes, boolean[] buttons, int[] counts);
 
