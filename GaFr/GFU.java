@@ -266,7 +266,7 @@ public class GFU
 
     public Iterator<T> iterator ()
     {
-      return new Iterator2D(array);
+      return new Iterator2D<T>(array);
     }
   }
 
