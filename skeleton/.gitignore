@@ -2,4 +2,5 @@
 *.jar
 *.jar.js
 gafr
+debug
 .*

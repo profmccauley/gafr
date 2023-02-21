@@ -4,6 +4,8 @@
 .*
 *.patch
 *.diff
+*.old
+debug
 fonts
 doc
 doxygen-awesome-css
