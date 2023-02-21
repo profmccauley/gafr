@@ -74,4 +74,4 @@ clean:
 
 .PHONY: cleanall
 cleanall: clean
-	@rm -rf doxygen-awesome-css doc
+	@rm -rf doxygen-awesome-css doc fonts/spleen
