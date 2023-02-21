@@ -63,6 +63,7 @@ debug: $(addprefix debug/,$(SOURCES)) debug/GaFr.jar.js
 .PHONY: doc
 doc: doxygen-awesome-css
 	@doxygen
+	@bash devtools/fix_doc_treeview_width.sh
 
 
 .PHONY: clean
