@@ -7,8 +7,11 @@ package GaFr;
   */
 public class GFGame
 {
-  /** These will control the canvas size. */
-  public int WIDTH = 800, HEIGHT = 500;
+  /** The canvas / "screen" width. */
+  public int WIDTH = 800;
+
+  /** The canvas / "screen" height. */
+  public int HEIGHT = 500;
 
   /** Internal use. */
   public GFStampManager _stampManager;
