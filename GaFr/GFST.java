@@ -21,6 +21,13 @@ public class GFST
   private static String stMethod = "?";
 
   /** Internal use for generating stack traces in CheerpJified code. */
+  public static boolean setLine (int lineNum)
+  {
+    stLine = lineNum;
+    return false;
+  }
+
+  /** Internal use for generating stack traces in CheerpJified code. */
   public static void pushStack (String methodName)
   {
     lastExceptionDepth = 0;

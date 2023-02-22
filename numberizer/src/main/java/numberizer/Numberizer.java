@@ -8,6 +8,7 @@ import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.nodeTypes.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.utils.*;
+import com.github.javaparser.ast.expr.BooleanLiteralExpr;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -29,6 +30,25 @@ public class Numberizer
       super(expression);
     }
   }
+
+  /// Used as part of loop conditions so that we can set the line number before doing a condition expression which might throw
+  private static Expression newConditional (int lineNum, Expression expr)
+  {
+    if (expr.isBooleanLiteralExpr()) return expr;
+    BinaryExpr e = StaticJavaParser.parseExpression("GaFr.GFST.setLine(" + lineNum + ") || true").asBinaryExpr();
+    e.setRight(expr);
+    return e;
+  }
+
+  /// Used in never-executed else branches of special "if (true)" statements.
+  private static class SafeThrowStmt extends ThrowStmt
+  {
+    public SafeThrowStmt ()
+    {
+      super( StaticJavaParser.parseExpression("new RuntimeException()") );
+    }
+  }
+
 
   private static class StatementCollector extends VoidVisitorAdapter<List<NodeList<Statement>>>
   {
@@ -84,7 +104,7 @@ public class Numberizer
         {
           fixStmt(elseBranch);
         }
-        else
+        else if (!(elseBranch instanceof SafeThrowStmt))
         {
           BlockStmt b = new BlockStmt();
           int bodyLineNum = elseBranch.getBegin().get().line;
@@ -94,6 +114,7 @@ public class Numberizer
         }
       }
     }
+    /*
     else if (s instanceof NodeWithBody)
     {
       int lineNum = s.getBegin().get().line;
@@ -111,6 +132,25 @@ public class Numberizer
       {
         ((BlockStmt)body).addStatement(newLNS(lineNum));
       }
+    }
+    */
+    else if (s instanceof ForStmt)
+    {
+      ForStmt ss = s.asForStmt();
+      if (ss.getCompare().isPresent())
+      {
+        ss.setCompare( newConditional(s.getBegin().get().line, ss.getCompare().get()) );
+      }
+    }
+    else if (s instanceof WhileStmt)
+    {
+      WhileStmt ss = s.asWhileStmt();
+      ss.setCondition( newConditional(s.getBegin().get().line, ss.getCondition()) );
+    }
+    else if (s instanceof DoStmt)
+    {
+      DoStmt ss = s.asDoStmt();
+      ss.setCondition( newConditional(s.getBegin().get().line, ss.getCondition()) );
     }
     else if (s.isSwitchStmt())
     {
@@ -214,6 +254,7 @@ public class Numberizer
         SwitchStmt s = statements.get(i).asSwitchStmt();
         IfStmt ifs = StaticJavaParser.parseStatement("if (true) true;").asIfStmt();
         ifs.setThenStmt(s);
+        ifs.setElseStmt(new SafeThrowStmt() );
         statements.set(i, ifs);
       }
 
