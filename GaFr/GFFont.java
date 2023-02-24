@@ -104,7 +104,7 @@ public class GFFont
     * loaded as so:
     *
     *     GFTexture tex = new GFTexture("fonts/bb_font.png", 0xff000000, 0);
-    *     GFStamp stamps = tex.splitIntoTilesBySize(32,26);
+    *     GFStamp[] stamps = tex.splitIntoTilesBySize(32,26);
     *     GFFont font = new GFFont(stamps,
     *        "ABCDEFGHIJKLMNOPQRSTUVWXYZ! _;0123456789\"(),-.'?:" );
     *     font.collapseCase();
