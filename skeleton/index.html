@@ -53,6 +53,29 @@ canvas
 <script src="gafr/deps/gafrjs.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+
+  var lastTime = null;
+  async function do_reload_check ()
+  {
+    setTimeout(do_reload_check, 1000);
+    const url = "Game.jar.js";
+    const ac = new AbortController();
+    const t = setTimeout(() => ac.abort(), 500);
+    const response = await fetch(url, {method: 'HEAD', signal: ac.signal});
+    clearTimeout(t);
+    const lm = response.headers.get("Last-Modified");
+    if (lastTime !== null && lastTime !== lm)
+    {
+      location.reload();
+    }
+    lastTime = lm;
+  }
+
+  if (gafr_isDebugOn() || (window.location.hash.indexOf("check") >= 0))
+  {
+    do_reload_check();
+  }
+
   // Trick CheerpJ into not reporting errors.
   cjLocation = {search : "", protocol : "file:", hostname : "" };
 
