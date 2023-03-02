@@ -66,9 +66,9 @@ public class Gfx
   public static int replaceRed (int color, int red)
   {
     //int rr = (color >>  0) & 0xff;
-    int gg = (color >>  0) & 0xff;
-    int bb = (color >>  0) & 0xff;
-    int aa = (color >>  0) & 0xff;
+    int gg = (color >>  8) & 0xff;
+    int bb = (color >> 16) & 0xff;
+    int aa = (color >> 24) & 0xff;
     int rr = clamp255(red);
     return aa << 24 | bb << 16 | gg << 8 | rr;
   }
@@ -76,9 +76,9 @@ public class Gfx
   public static int replaceGreen (int color, int green)
   {
     int rr = (color >>  0) & 0xff;
-    //int gg = (color >>  0) & 0xff;
-    int bb = (color >>  0) & 0xff;
-    int aa = (color >>  0) & 0xff;
+    //int gg = (color >>  8) & 0xff;
+    int bb = (color >> 16) & 0xff;
+    int aa = (color >> 24) & 0xff;
     int gg = clamp255(green);
     return aa << 24 | bb << 16 | gg << 8 | rr;
   }
@@ -86,9 +86,9 @@ public class Gfx
   public static int replaceBlue (int color, int blue)
   {
     int rr = (color >>  0) & 0xff;
-    int gg = (color >>  0) & 0xff;
-    //int bb = (color >>  0) & 0xff;
-    int aa = (color >>  0) & 0xff;
+    int gg = (color >>  8) & 0xff;
+    //int bb = (color >> 16) & 0xff;
+    int aa = (color >> 24) & 0xff;
     int bb = clamp255(blue);
     return aa << 24 | bb << 16 | gg << 8 | rr;
   }
@@ -96,9 +96,9 @@ public class Gfx
   public static int replaceAlpha (int color, int alpha)
   {
     int rr = (color >>  0) & 0xff;
-    int gg = (color >>  0) & 0xff;
-    int bb = (color >>  0) & 0xff;
-    //int aa = (color >>  0) & 0xff;
+    int gg = (color >>  8) & 0xff;
+    int bb = (color >> 16) & 0xff;
+    //int aa = (color >> 24) & 0xff;
     int aa = clamp255(alpha);
     return aa << 24 | bb << 16 | gg << 8 | rr;
   }
