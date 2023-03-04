@@ -83,12 +83,49 @@ public class GFU
 
   /** Float version of cos(). */
   public static float cosf (double a) { return (float)Math.cos(a); }
-  /** Float version of sin(). */
-  public static float sinf (double a) { return (float)Math.sin(a); }
   /** Float version of cos(). */
   public static float cosf (float a) { return (float)Math.cos(a); }
   /** Float version of sin(). */
+  public static float sinf (double a) { return (float)Math.sin(a); }
+  /** Float version of sin(). */
   public static float sinf (float a) { return (float)Math.sin(a); }
+  /** Float version of tan(). */
+  public static float tanf (double a) { return (float)Math.tan(a); }
+  /** Float version of tan(). */
+  public static float tanf (float a) { return (float)Math.tan(a); }
+  /** Float version of acos(). */
+  public static float acosf (double a) { return (float)Math.acos(a); }
+  /** Float version of acos(). */
+  public static float acosf (float a) { return (float)Math.acos(a); }
+  /** Float version of asin(). */
+  public static float asinf (double a) { return (float)Math.asin(a); }
+  /** Float version of asin(). */
+  public static float asinf (float a) { return (float)Math.asin(a); }
+  /** Float version of atan(). */
+  public static float atanf (double a) { return (float)Math.atan(a); }
+  /** Float version of atan(). */
+  public static float atanf (float a) { return (float)Math.atan(a); }
+  /** Float version of atan2(). */
+  public static float atan2f (double y, double x) { return (float)Math.atan2(y,x); }
+  /** Float version of atan2(). */
+  public static float atan2f (float y, float x) { return (float)Math.atan2(y,x); }
+  /** Float version of hypot(). */
+  public static float hypotf (double y, double x) { return (float)Math.hypot(y,x); }
+  /** Float version of hypot(). */
+  public static float hypotf (float y, float x) { return (float)Math.hypot(y,x); }
+  /** Float version of toDegrees(). */
+  public static float toDegf (double a) { return (float)Math.toDegrees(a); }
+  /** Float version of toDegrees(). */
+  public static float toDegf (float a) { return (float)Math.toDegrees(a); }
+  /** Float version of toRadians(). */
+  public static float toRadf (double a) { return (float)Math.toRadians(a); }
+  /** Float version of toRadians(). */
+  public static float toRadf (float a) { return (float)Math.toRadians(a); }
+
+  /** Float version of signum(). */
+  public static float signumf (float a) { return Math.signum(a); }
+  /** Float version of signum(). */
+  public static float signumf (double a) { return Math.signum((float)a); }
 
   /** Wraps value into a range.
     * lo should be less than hi.
