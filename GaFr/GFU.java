@@ -165,6 +165,14 @@ public class GFU
   {
     return wrapf(v, 0, 1);
   }
+  /** Wraps value into the range [0,2pi).
+    *
+    * @see GFU#wrapf(double, double, double)
+    */
+  public static float wraprad (float v)
+  {
+    return wrapf(v, 0, 2*PIf);
+  }
 
   /** Wraps value into a range.
     *
