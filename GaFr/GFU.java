@@ -284,6 +284,42 @@ public class GFU
     return random.nextInt(hi-lo+1) + lo;
   }
 
+  /** Returns a random number.
+   *
+   * @param lo     The lower bound
+   * @param hi     The upper bound
+   *
+   * The return value is between [lo,hi).
+   */
+  public static double rand (double lo, double hi)
+  {
+    return random.nextDouble() * (hi-lo) + lo;
+  }
+
+  /** Returns a random number.
+   *
+   * @param lo     The lower bound
+   * @param hi     The upper bound
+   *
+   * The return value is between [lo,hi).
+   */
+  public static float randf (double lo, double hi)
+  {
+    return random.nextFloat() * (float)(hi-lo) + (float)lo;
+  }
+
+  /** Returns a random number.
+   *
+   * @param lo     The lower bound
+   * @param hi     The upper bound
+   *
+   * The return value is between [lo,hi).
+   */
+  public static float randf (float lo, float hi)
+  {
+    return random.nextFloat() * (hi-lo) + lo;
+  }
+
   /** A generic iterator for 2D arrays.
     *
     * It can be nice to be able just iterate over each element of
