@@ -127,7 +127,6 @@ In short: you can help to further the development of GaFr, up to and including
 being a substantial contributor to the project, for whatever that's worth!
 Here are a few ideas of new features that you could add:
 
-- Adjust volume of sounds
 - Fading of sounds
 - Sound sprites
 - Texture atlases, possibly using the format used by libGDX's texture packer
@@ -140,8 +139,7 @@ Here are a few ideas of new features that you could add:
   not putting all the characters on the same "line".
 - Variable-width fonts, possibly using the format used by
   [libGDX's Hiero utility](https://libgdx.com/wiki/tools/hiero)
-- Text measurement
-- Centered text drawing
+- Text measurement and centered text drawing
 - Angled text drawing
 - A general-purpose matrix transform stack
 - Much more!
@@ -179,6 +177,21 @@ python3 -m http.server 9999
 ```
 
 Now navigate to http://127.0.0.1:9999/ and you should be in business!
+
+## Distribuing GaFr Projects
+Using the `make dist` command builds a `WWW` directory that hopefully has
+the bare essentials for your project (not the source code, for example).
+The contents of this directory can be placed on a web server and with
+any luck, your game will just run.  It also puts the same stuff in a
+.zip file (`gafr_game.zip`) for easy distribution.
+
+If you don't want to put your game up on a web server and just want to
+download the files to your computer and open them... this doesn't quite
+work.  GaFr really does currently require a web server.  *However*, the
+zip file contains a Python script called `run_game.py`, which is a (very)
+slightly specialized web server for running the game.  See the
+`README.txt` file it includes for a bit more information on how to use
+it to run your game on a machine with no normal web server involved.
 
 ## The Documentation
 It's possible you're reading the documentation right now!  At least this
