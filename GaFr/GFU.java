@@ -141,6 +141,7 @@ public class GFU
     * lo should be less than hi.
     * If lo is 0 and value is not negative, this is just modulus.
     * The output is in the range [lo,hi).
+    * Returns v if v is [lo,hi).
     */
   public static double wrapf (double v, double lo, double hi)
   {
@@ -260,6 +261,187 @@ public class GFU
   {
     return clamp(v, 0, 1);
   }
+  /** Clamps a floating point value to [0,1).
+    */
+  public static float clamp1f (double v)
+  {
+    return clamp((float)v, 0, 1);
+  }
+  /** Clamps a floating point value to [0,1).
+    */
+  public static float clamp1f (float v)
+  {
+    return clamp(v, 0, 1);
+  }
+
+
+  /** Scales a value into the range [a,b].
+    *
+    * Assuming v is in the range [0,1], the output is scaled into the range
+    * [a,b].  If the input is outside of [0,1], the output will be outside
+    * of [a,b].
+    *
+    * @see GFU#scaleClampf(float, float, float)
+    * @see GFU#unscalef(float, float, float)
+    */
+  public static float scalef (float v, float a, float b)
+  {
+    return v*(a-b)+a;
+  }
+
+  /** Scales a value into the range [a,b].
+    *
+    * @see GFU#scaleClampf(float, float, float)
+    */
+  public static float scalef (double v, double a, double b)
+  {
+    return (float)(v*(a-b)+a);
+  }
+
+  /** Scales a value into the range [a,b].
+    *
+    * Assuming v is in the range [0,1], the output is scaled into the range
+    * [a,b].  If the input is outside of [0,1], the output will be outside
+    * of [a,b].
+    *
+    * @see GFU#scalef(float, float, float)
+    */
+  public static double scale (double v, double a, double b)
+  {
+    return v*(a-b)+a;
+  }
+
+  /** Scales a value into the range [a,b].
+    *
+    * @see GFU#scalef(float, float, float)
+    */
+  public static float scale (float v, float a, float b)
+  {
+    return v*(a-b)+a;
+  }
+
+
+  /** Scales a value into the range [a,b].
+    *
+    * Assuming v is in the range [0,1], the output is scaled into the range
+    * [a,b].  If v is outside of [0,1], the result is still bound by [a,b].
+    *
+    * @see GFU#scalef(float, float, float)
+    * @see GFU#unscaleClampf(float, float, float)
+    */
+  public static float scaleClampf (float v, float a, float b)
+  {
+    return scalef(clamp1f(v), a, b);
+  }
+
+  /** Scales a value into the range [a,b].
+    *
+    * @see GFU#scaleClampf(float, float, float)
+    */
+  public static float scaleClampf (double v, double a, double b)
+  {
+    return scalef(clamp1(v), a, b);
+  }
+
+  /** Scales a value into the range [a,b].
+    *
+    * @see GFU#scaleClampf(float, float, float)
+    */
+  public static double scaleClamp (double v, double a, double b)
+  {
+    return scale(clamp1(v), a, b);
+  }
+
+  /** Scales a value into the range [a,b].
+    *
+    * @see GFU#scaleClampf(float, float, float)
+    */
+  public static float scaleClamp (float v, float a, float b)
+  {
+    return scalef(clamp1f(v), a, b);
+  }
+
+
+  /** Scales a value into the range [0,1].
+    *
+    * Give a value v in the range [a,b], outputs the value scaled into the
+    * range [0,1].  If the input is outside of [a,b], the output will be
+    * correspondingly outside of [0,1].
+    *
+    * @see GFU#unscaleClampf(float, float, float)
+    * @see GFU#scalef(float, float, float)
+    */
+  public static float unscalef (float v, float a, float b)
+  {
+    return (v-a)/(b-a);
+  }
+
+  /** Scales a value into the range [0,1].
+    *
+    * @see GFU#unscaleClampf(float, float, float)
+    */
+  public static float unscalef (double v, double a, double b)
+  {
+    return (float)unscale(v, a, b);
+  }
+
+  /** Scales a value into the range [0,1].
+    *
+    * @see GFU#unscalef(float, float, float)
+    */
+  public static double unscale (double v, double a, double b)
+  {
+    return (v-a)/(b-a);
+  }
+
+  /** Scales a value into the range [0,1].
+    *
+    * @see GFU#unscalef(float, float, float)
+    */
+  public static float unscale (float v, float a, float b)
+  {
+    return (v-a)/(b-a);
+  }
+
+
+  /** Scales a value into the range [0,1].
+    *
+    * Similar to unscale(), but the result will be clamped to the range [0,1].
+    *
+    * @see GFU#unscalef(float, float, float)
+    */
+  public static float unscaleClampf (float v, float a, float b)
+  {
+    return clamp1f((v-a)/(b-a));
+  }
+
+  /** Scales a value into the range [0,1].
+    *
+    * @see GFU#unscaleClampf(float, float, float)
+    */
+  public static float unscaleClampf (double v, double a, double b)
+  {
+    return clamp1f(unscale(v, a, b));
+  }
+
+  /** Scales a value into the range [0,1].
+    *
+    * @see GFU#unscaleClampf(float, float, float)
+    */
+  public static double unscaleClamp (double v, double a, double b)
+  {
+    return clamp1((v-a)/(b-a));
+  }
+
+  /** Scales a value into the range [0,1].
+    *
+    * @see GFU#unscaleClampf(float, float, float)
+    */
+  public static float unscaleClamp (float v, float a, float b)
+  {
+    return clamp1f((v-a)/(b-a));
+  }
+
 
   /** The value of PI. */
   public static final double PI = Math.PI;
