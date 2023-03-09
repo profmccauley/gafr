@@ -127,6 +127,16 @@ public class GFU
   /** Float version of signum(). */
   public static float signumf (double a) { return Math.signum((float)a); }
 
+  /** Float version of pow(). */
+  public static float powf (float a, float b) { return (float)Math.pow(a, b); }
+  /** Float version of pow(). */
+  public static float powf (double a, double b) { return (float)Math.pow(a, b); }
+
+  /** Float version of sqrt(). */
+  public static float sqrtf (float a) { return (float)Math.sqrt(a); }
+  /** Float version of sqrt(). */
+  public static float sqrtf (double a) { return (float)Math.sqrt(a); }
+
   /** Wraps value into a range.
     * lo should be less than hi.
     * If lo is 0 and value is not negative, this is just modulus.
