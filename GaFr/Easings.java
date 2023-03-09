@@ -1,0 +1,497 @@
+package GaFr;
+import java.util.ArrayList;
+
+/**
+  * Easing functions.
+  *
+  * See https://easings.net/ nice graphs of these functions.  (That's also
+  * where many of the functions came from.)
+  */
+class Easings
+{
+  /**
+    * A concatenation of two easings.
+    *
+    * This creates a joint easing which does one followed by another.
+    */
+  public static class EasingPair
+  {
+    public Easing e1;
+    public Easing e2;
+    public EasingPair (Easing e1, Easing e2)
+    {
+      this.e1 = e1;
+      this.e2 = e2;
+    }
+    public float f (float x)
+    {
+      if (x < 0) x = 0;
+      else if (x > 1) x = 1;
+      if (x <= 0.5) return e1.f(x*2);
+      return e2.f(x-0.5f);
+    }
+  }
+
+  /**
+    * A concatenation of easings.
+    *
+    * This creates a joint easing which does one followed by another.
+    */
+  public static class EasingGroup
+  {
+    public static class Pair
+    {
+      Easing e;
+      double w;
+      double a, b;
+      public Pair (Easing e, double w)
+      {
+        this.e = e;
+        this.w = w;
+      }
+    }
+    ArrayList<Pair> easings = new ArrayList<>();
+    protected boolean initialized;
+
+    public EasingGroup add (Easing e, double w)
+    {
+      easings.add(new Pair(e, w) );
+      return this;
+    }
+
+    public EasingGroup add (Easing e)
+    {
+      return add(e, 1);
+    }
+
+    protected void initialize ()
+    {
+      double total = 0;
+      for (Pair p : easings)
+        total += p.w;
+
+      double a = 0;
+      double b = 0;
+      for (Pair p : easings)
+      {
+        p.a = a;
+        b = b + p.w/total;
+        a = b;
+        p.b = b;
+      }
+
+      initialized = true;
+    }
+
+    public float f (float x)
+    {
+      if (!initialized) initialize();
+
+      Pair e = easings.get(easings.size()-1);
+
+      for (Pair p : easings)
+      {
+        if (x < p.b)
+        {
+          e = p;
+          break;
+        }
+      }
+
+      double xx = (x - e.a) / (e.b-e.a);
+      return e.e.f((float)xx);
+    }
+  }
+
+  /**
+    * Inverts the output of an easing.
+    */
+  public class Invert
+  {
+    public Easing e;
+    public Invert (Easing e)
+    {
+      this.e = e;
+    }
+    public float f (float x)
+    {
+      if (x < 0) x = 0;
+      else if (x > 1) x = 1;
+      return e.f(1-x);
+    }
+  }
+
+  /**
+    * Reverses the input of an easing.
+    */
+  public class Reverse
+  {
+    public Easing e;
+    public Reverse (Easing e)
+    {
+      this.e = e;
+    }
+    public float f (float x)
+    {
+      return e.f(x);
+    }
+  }
+
+  /**
+    * A superclass for easing functions.
+    */
+  public abstract static class Easing
+  {
+    public double ease (double x)
+    {
+      if (x < 0) x = 0;
+      else if (x > 1) x = 1;
+      return f(x);
+    }
+    public float easef (double x)
+    {
+      return easef((float)x);
+    }
+    public float easef (float x)
+    {
+      if (x < 0) x = 0;
+      else if (x > 1) x = 1;
+      return f(x);
+    }
+
+    public abstract float f (float x);
+
+    public double f (double x)
+    {
+      return f((float)x);
+    }
+  }
+
+  public static class EaseLinear
+  {
+    public float f (float x) { return x; }
+  }
+
+  public static class EaseInSine
+  {
+    public float f (float x) { return 1 - GFU.cosf((x * GFU.PIf) / 2); }
+  }
+
+  public static class EaseOutSine extends Easing
+  {
+    public float f (float x) { return GFU.sinf((x * GFU.PIf) / 2); }
+  }
+
+  public static class EaseInOutSine extends Easing
+  {
+    public float f (float x) { return -(GFU.cosf(GFU.PIf * x) - 1) / 2; }
+  }
+
+  public static class EaseInQuad extends Easing
+  {
+    public float f (float x) { return x * x; }
+  }
+
+  public static class EaseOutQuad extends Easing
+  {
+    public float f (float x) { return 1 - (1 - x) * (1 - x); }
+  }
+
+  public static class EaseInOutQuad extends Easing
+  {
+    public float f (float x) { return x < 0.5 ? 2 * x * x : 1 - GFU.powf(-2 * x + 2, 2) / 2; }
+  }
+
+  public static class EaseInCubic extends Easing
+  {
+    public float f (float x) { return x * x * x; }
+  }
+
+  public static class EaseOutCubic extends Easing
+  {
+    public float f (float x) { return 1 - GFU.powf(1 - x, 3); }
+  }
+
+  public static class EaseInOutCubic extends Easing
+  {
+    public float f (float x) { return x < 0.5 ? 4 * x * x * x : 1 - GFU.powf(-2 * x + 2, 3) / 2; }
+  }
+
+  public static class EaseInQuart extends Easing
+  {
+    public float f (float x) { return x * x * x * x; }
+  }
+
+  public static class EaseOutQuart extends Easing
+  {
+    public float f (float x) { return 1 - GFU.powf(1 - x, 4); }
+  }
+
+  public static class EaseInOutQuart extends Easing
+  {
+    public float f (float x) { return x < 0.5 ? 8 * x * x * x * x : 1 - GFU.powf(-2 * x + 2, 4) / 2; }
+  }
+
+  public static class EaseInQuint extends Easing
+  {
+    public float f (float x) { return x * x * x * x * x; }
+  }
+
+  public static class EaseOutQuint extends Easing
+  {
+    public float f (float x) { return 1 - GFU.powf(1 - x, 5); }
+  }
+
+  public static class EaseInOutQuint extends Easing
+  {
+    public float f (float x) { return x < 0.5 ? 16 * x * x * x * x * x : 1 - GFU.powf(-2 * x + 2, 5) / 2; }
+  }
+
+  public static class EaseInExpo extends Easing
+  {
+    public float f (float x) { return x == 0 ? 0 : GFU.powf(2, 10 * x - 10); }
+  }
+
+  public static class EaseOutExpo extends Easing
+  {
+    public float f (float x) { return x == 1 ? 1 : 1 - GFU.powf(2, -10 * x); }
+  }
+
+  public static class EaseInOutExpo extends Easing
+  {
+    public float f (float x)
+    {
+      return x == 0
+        ? 0
+        : x == 1
+        ? 1
+        : x < 0.5 ? GFU.powf(2, 20 * x - 10) / 2
+        : (2 - GFU.powf(2, -20 * x + 10)) / 2;
+    }
+  }
+
+  public static class EaseInCirc extends Easing
+  {
+    public float f (float x) { return 1 - GFU.sqrtf(1 - GFU.powf(x, 2)); }
+  }
+
+  public static class EaseOutCirc extends Easing
+  {
+    public float f (float x) { return GFU.sqrtf(1 - GFU.powf(x - 1, 2)); }
+  }
+
+  public static class EaseInOutCirc extends Easing
+  {
+    public float f (float x)
+    {
+      return x < 0.5
+        ? (1 - GFU.sqrtf(1 - GFU.powf(2 * x, 2))) / 2
+        : (GFU.sqrtf(1 - GFU.powf(-2 * x + 2, 2)) + 1) / 2;
+    }
+  }
+
+  public static class EaseInBack extends Easing
+  {
+    public float c1 = 1.70158f;
+    public float c3 = c1 + 1;
+
+    public float f (float x)
+    {
+      return c3 * x * x * x - c1 * x * x;
+    }
+  }
+
+  public static class EaseOutBack extends Easing
+  {
+    public float c1 = 1.70158f;
+    public float c3 = c1 + 1;
+
+    public float f (float x)
+    {
+      return 1 + c3 * GFU.powf(x - 1, 3) + c1 * GFU.powf(x - 1, 2);
+    }
+  }
+
+  public static class EaseInOutBack extends Easing
+  {
+    public float c1 = 1.70158f;
+    public float c2 = c1 * 1.525f;
+
+    public float f (float x)
+    {
+      return x < 0.5
+        ? (GFU.powf(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+        : (GFU.powf(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
+    }
+  }
+
+  public static class EaseInElastic extends Easing
+  {
+    public float c4 = (2 * GFU.PIf) / 3f;
+
+    public float f (float x)
+    {
+      return x == 0
+        ? 0
+        : x == 1
+        ? 1
+        : -GFU.powf(2, 10 * x - 10) * GFU.sinf((x * 10 - 10.75) * c4);
+    }
+  }
+
+  public static class EaseOutElastic extends Easing
+  {
+    public float c4 = (2 * GFU.PIf) / 3f;
+
+    public float f (float x)
+    {
+      return x == 0
+        ? 0
+        : x == 1
+        ? 1
+        : GFU.powf(2, -10 * x) * GFU.sinf((x * 10 - 0.75) * c4) + 1;
+    }
+  }
+
+  public static class EaseInOutElastic extends Easing
+  {
+    public float c5 = (2 * GFU.PIf) / 4.5f;
+
+    public float f (float x)
+    {
+      return x == 0
+        ? 0
+        : x == 1
+        ? 1
+        : x < 0.5
+        ? -(GFU.powf(2, 20 * x - 10) * GFU.sinf((20 * x - 11.125f) * c5)) / 2
+        : (GFU.powf(2, -20 * x + 10) * GFU.sinf((20 * x - 11.125f) * c5)) / 2 + 1;
+    }
+  }
+
+  public static class EaseInBounce extends Easing
+  {
+    public float f (float x) { return 1 - easeOutBounce.f(1 - x); }
+  }
+
+  public static class EaseOutBounce extends Easing
+  {
+    public static float n1 = 7.5625f;
+    public static float d1 = 2.75f;
+
+    public float f (float x)
+    {
+      if (x < 1 / d1) {
+          return n1 * x * x;
+      } else if (x < 2 / d1) {
+          return n1 * (x -= 1.5f / d1) * x + 0.75f;
+      } else if (x < 2.5f / d1) {
+          return n1 * (x -= 2.25f / d1) * x + 0.9375f;
+      } else {
+          return n1 * (x -= 2.625f / d1) * x + 0.984375f;
+      }
+    }
+  }
+
+  public static class EaseInOutBounce extends Easing
+  {
+    public static float n1 = 7.5625f;
+    public static float d1 = 2.75f;
+
+    protected float f2 (float x) // This is just EaseOutBounce
+    {
+      if (x < 1 / d1) {
+          return n1 * x * x;
+      } else if (x < 2 / d1) {
+          return n1 * (x -= 1.5f / d1) * x + 0.75f;
+      } else if (x < 2.5f / d1) {
+          return n1 * (x -= 2.25f / d1) * x + 0.9375f;
+      } else {
+          return n1 * (x -= 2.625f / d1) * x + 0.984375f;
+      }
+    }
+    public float f (float x)
+    {
+      return x < 0.5
+        ? (1 - f2(1 - 2 * x)) / 2
+        : (1 + f2(2 * x - 1)) / 2;
+    }
+  }
+
+  public static class Smoothstep extends Easing
+  {
+    public float f (float x)
+    {
+      return x * x * (3 - 2 * x);
+    }
+  }
+
+  public static class Smootherstep extends Easing
+  {
+    public float f (float x)
+    {
+      return x * x * x * (x * (x * 6 - 15) + 10);
+    }
+  }
+
+  public static class Constant0 extends Easing
+  {
+    public float f (float x)
+    {
+      return 0;
+    }
+  }
+
+  public static class Constant1 extends Easing
+  {
+    public float f (float x)
+    {
+      return 1;
+    }
+  }
+
+  public static class Square extends Easing
+  {
+    public float f (float x)
+    {
+      if (x > 0.5) return 1;
+      return 0;
+    }
+  }
+
+  public static EaseLinear easeLinear = new EaseLinear();
+  public static EaseOutSine easeOutSine = new EaseOutSine();
+  public static EaseInOutSine easeInOutSine = new EaseInOutSine();
+  public static EaseInQuad easeInQuad = new EaseInQuad();
+  public static EaseOutQuad easeOutQuad = new EaseOutQuad();
+  public static EaseInOutQuad easeInOutQuad = new EaseInOutQuad();
+  public static EaseInCubic easeInCubic = new EaseInCubic();
+  public static EaseOutCubic easeOutCubic = new EaseOutCubic();
+  public static EaseInOutCubic easeInOutCubic = new EaseInOutCubic();
+  public static EaseInQuart easeInQuart = new EaseInQuart();
+  public static EaseOutQuart easeOutQuart = new EaseOutQuart();
+  public static EaseInOutQuart easeInOutQuart = new EaseInOutQuart();
+  public static EaseInQuint easeInQuint = new EaseInQuint();
+  public static EaseOutQuint easeOutQuint = new EaseOutQuint();
+  public static EaseInOutQuint easeInOutQuint = new EaseInOutQuint();
+  public static EaseInExpo easeInExpo = new EaseInExpo();
+  public static EaseOutExpo easeOutExpo = new EaseOutExpo();
+  public static EaseInOutExpo easeInOutExpo = new EaseInOutExpo();
+  public static EaseInCirc easeInCirc = new EaseInCirc();
+  public static EaseOutCirc easeOutCirc = new EaseOutCirc();
+  public static EaseInOutCirc easeInOutCirc = new EaseInOutCirc();
+  public static EaseInBack easeInBack = new EaseInBack();
+  public static EaseOutBack easeOutBack = new EaseOutBack();
+  public static EaseInOutBack easeInOutBack = new EaseInOutBack();
+  public static EaseInElastic easeInElastic = new EaseInElastic();
+  public static EaseOutElastic easeOutElastic = new EaseOutElastic();
+  public static EaseInOutElastic easeInOutElastic = new EaseInOutElastic();
+  public static EaseInBounce easeInBounce = new EaseInBounce();
+  public static EaseOutBounce easeOutBounce = new EaseOutBounce();
+  public static EaseInOutBounce easeInOutBounce = new EaseInOutBounce();
+  public static Smoothstep smoothstep = new Smoothstep();
+  public static Smootherstep smootherstep = new Smootherstep();
+  public static Constant0 constant0 = new Constant0();
+  public static Constant1 constant1 = new Constant1();
+  public static Square square = new Square();
+}
