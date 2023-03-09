@@ -5,7 +5,6 @@ import java.io.IOException;
 public class GFBoot
 {
   public static String basePath;
-  public static int frameCount;
   public static GFGame game;
 
   public static void main (String[] args) throws IOException
@@ -78,8 +77,9 @@ public class GFBoot
   public static void onDraw ()
   {
     //System.out.println("Java: draw()");
+    ++GFCore.updateCount;
     if (game!=null) game.onUpdate();
-    ++frameCount;
-    if (game!=null) game.onDrawBegin(frameCount);
+    ++GFCore.frameCount;
+    if (game!=null) game.onDrawBegin(GFCore.frameCount);
   }
 }
