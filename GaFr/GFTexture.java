@@ -1,6 +1,7 @@
 package GaFr;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.awt.Graphics;
 
 /**
   * A texture.
@@ -57,53 +58,39 @@ public class GFTexture
     this(fileName, 0, 0);
   }
 
-  /// Internal use.
-  protected void loadTexture (String fileName, int inColor, int outColor)
+  /// \overload
+  public GFTexture (GFPixels img)
   {
-    fileName = GFBoot.resolvePath(fileName);
-    //System.out.print("loading " + fileName);
+    loadTexture(img, 0, 0);
+  }
 
-    BufferedImage img;
-    try
-    {
-      // See notes in GFBoot, but this doesn't work reliably...
-      //img = ImageIO.read(new File(fileName));
+  /// Internal use.
+  protected void loadTexture (GFPixels img, int inColor, int outColor)
+  {
+    if (inColor != outColor)
+      img = img.replaceColor(inColor, outColor);
 
-      // .. so we do it this way instead.
-      img = ImageIO.read(GFU.loadAsStream(fileName));
-    }
-    catch (Exception e)
-    {
-      throw new RuntimeException(e);
-    }
+    u0 = 0; v0 = 0;
+    u1 = img.width; v1 = img.height;
 
-    width = img.getWidth();
-    height = img.getHeight();
+    width = img.width;
+    height = img.height;
 
     if (width > MAX_TEXTURE_SIZE || height > MAX_TEXTURE_SIZE)
     {
       // This will result in a loss of quality, but oh well!
-      int ww = Math.min(img.getWidth(), MAX_TEXTURE_SIZE);
-      int hh = Math.min(img.getHeight(), MAX_TEXTURE_SIZE);
-      GFU.log("Warning: Texture size ",img.getWidth(),"x",img.getHeight(),
+      int ww = Math.min(img.width, MAX_TEXTURE_SIZE);
+      int hh = Math.min(img.height, MAX_TEXTURE_SIZE);
+      GFU.log("Warning: Texture size ",img.width,"x",img.height,
               " is too large; rescaling to ",ww,"x",hh,".");
       //TODO: The above should probably be GFU.warn().
-      BufferedImage scaled = new BufferedImage(ww, hh, img.getType());
-      scaled.createGraphics().drawImage(img, 0, 0, ww, hh, null);
-      //TODO: .dispose() the Graphics2D instance
-      img = scaled;
+      BufferedImage src = img.toBufferedImage();
+      BufferedImage scaled = new BufferedImage(ww, hh, src.getType());
+      Graphics g = scaled.createGraphics();
+      g.drawImage(src, 0, 0, ww, hh, null);
+      g.dispose();
+      img = new GFPixels(scaled);
     }
-
-    int[] pix = img.getRGB(0,0, img.getWidth(), img.getHeight(), null, 0, img.getWidth());
-    if (inColor != outColor)
-    {
-      for (int i = 0; i < pix.length; ++i)
-      {
-        if (pix[i] == inColor) pix[i] = outColor;
-      }
-    }
-    u0 = 0; v0 = 0;
-    u1 = width; v1 = height;
 
     GFN.gl_createTexture(this);
 
@@ -112,7 +99,17 @@ public class GFTexture
     GFN.gl_activeTexture(Gl.TEXTURE0 + 7);
     GFN.gl_bindTexture(Gl.TEXTURE_2D, this);
 
-    GFN.gl_texImage2D(0, Gl.RGBA, img.getWidth(), img.getHeight(), Gl.RGBA, pix, 0);
+    GFN.gl_texImage2D(0, Gl.RGBA, img.width, img.height, Gl.RGBA, img.pix, 0);
+  }
+
+  /// Internal use.
+  protected void loadTexture (String fileName, int inColor, int outColor)
+  {
+    loadTexture( new GFPixels(fileName), inColor, outColor );
+    // The code that used to be here is somewhat more efficient in cases
+    // where a texture needs to be resized to be loaded.  It has been
+    // removed to avoid (mostly) duplicate code.  It could be brought
+    // back if performance demanded it.
   }
 
   /** Split texture into tiles.
