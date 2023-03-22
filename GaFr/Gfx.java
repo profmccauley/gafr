@@ -102,4 +102,25 @@ public class Gfx
     int aa = clamp255(alpha);
     return aa << 24 | bb << 16 | gg << 8 | rr;
   }
+
+  /** Get the red portion of a color. */
+  public static int getRed (int color)
+  {
+    return (color >> 0) & 0xff;
+  }
+  /** Get the green portion of a color. */
+  public static int getGreen (int color)
+  {
+    return (color >> 8) & 0xff;
+  }
+  /** Get the blue portion of a color. */
+  public static int getBlue (int color)
+  {
+    return (color >> 16) & 0xff;
+  }
+  /** Get the red portion of a color. */
+  public static int getAlpha (int color)
+  {
+    return (color >> 24) & 0xff;
+  }
 }
