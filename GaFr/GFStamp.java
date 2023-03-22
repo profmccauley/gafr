@@ -68,6 +68,12 @@ public class GFStamp
     origHeight = t.height;
   }
 
+  /** Initialize from pixel data. */
+  public GFStamp (GFPixels pix)
+  {
+    this(new GFTexture(pix));
+  }
+
   /** Load image from file. */
   public GFStamp (String fileName)
   {
