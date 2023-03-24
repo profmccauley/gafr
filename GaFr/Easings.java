@@ -7,14 +7,14 @@ import java.util.ArrayList;
   * See https://easings.net/ nice graphs of these functions.  (That's also
   * where many of the functions came from.)
   */
-class Easings
+public class Easings
 {
   /**
     * A concatenation of two easings.
     *
     * This creates a joint easing which does one followed by another.
     */
-  public static class EasingPair
+  public static class EasingPair extends Easing
   {
     public Easing e1;
     public Easing e2;
@@ -37,7 +37,7 @@ class Easings
     *
     * This creates a joint easing which does one followed by another.
     */
-  public static class EasingGroup
+  public static class EasingGroup extends Easing
   {
     public static class Pair
     {
@@ -106,7 +106,7 @@ class Easings
   /**
     * Inverts the output of an easing.
     */
-  public class Invert
+  public class Invert extends Easing
   {
     public Easing e;
     public Invert (Easing e)
@@ -124,7 +124,7 @@ class Easings
   /**
     * Reverses the input of an easing.
     */
-  public class Reverse
+  public class Reverse extends Easing
   {
     public Easing e;
     public Reverse (Easing e)
@@ -142,16 +142,19 @@ class Easings
     */
   public abstract static class Easing
   {
+    /// Apply easing
     public double ease (double x)
     {
       if (x < 0) x = 0;
       else if (x > 1) x = 1;
       return f(x);
     }
+    /// Apply easing (float version)
     public float easef (double x)
     {
       return easef((float)x);
     }
+    /// Apply easing (float version)
     public float easef (float x)
     {
       if (x < 0) x = 0;
@@ -159,20 +162,22 @@ class Easings
       return f(x);
     }
 
+    /// Perform easing
     public abstract float f (float x);
 
+    /// Perform easing
     public double f (double x)
     {
       return f((float)x);
     }
   }
 
-  public static class EaseLinear
+  public static class EaseLinear extends Easing
   {
     public float f (float x) { return x; }
   }
 
-  public static class EaseInSine
+  public static class EaseInSine extends Easing
   {
     public float f (float x) { return 1 - GFU.cosf((x * GFU.PIf) / 2); }
   }
