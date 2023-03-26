@@ -2,6 +2,8 @@ import GaFr.GFGame;
 import GaFr.GFStamp;
 import GaFr.GFFont;
 import GaFr.Gfx;
+import GaFr.GFU;
+import GaFr.Easings;
 
 public class Game extends GFGame
 {
@@ -33,7 +35,9 @@ public class Game extends GFGame
     hue += 0.001;
     font.color = java.awt.Color.HSBtoRGB(hue, 1, 1);
 
-    font.draw(128+16,20, "Welcome to GaFr!");
+    float p = GFU.unscaleClampf(frameCount/60f, 0, 3); // p goes from 0 to 1 in three seconds
+    p = Easings.easeOutBounce.easef(p);
+    font.draw(128+16,GFU.scalef(p, HEIGHT, 20), "Welcome to GaFr!");
 
     logo.moveTo( (int)x, (int)y ).stamp();
     x += vx;
