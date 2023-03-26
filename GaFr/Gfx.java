@@ -15,8 +15,8 @@ public class Gfx
   {
     public static final int BLACK = 0xff000000;
     public static final int WHITE = 0xffFFffFF;
-    public static final int RED =   0xff0000FF;
-    public static final int BLUE =  0xffFF0000;
+    public static final int RED =   0xffFF0000;
+    public static final int BLUE =  0xff0000FF;
     public static final int GREEN = 0xff00FF00;
 
     /** "Magic pink", often used for transparency.
@@ -31,9 +31,9 @@ public class Gfx
   /** Set the color that will be used to clear the screen. */
   public static void clearColor (int c)
   {
-    GFN.gl_clearColor( ((c >>  0) & 0xff) / 255.0f,
+    GFN.gl_clearColor( ((c >> 16) & 0xff) / 255.0f,
                        ((c >>  8) & 0xff) / 255.0f,
-                       ((c >> 16) & 0xff) / 255.0f,
+                       ((c >>  0) & 0xff) / 255.0f,
                        ((c >> 24) & 0xff) / 255.0f );
   }
 
@@ -47,7 +47,7 @@ public class Gfx
     int gg = GFU.clamp255((int)(g * 255));
     int bb = GFU.clamp255((int)(b * 255));
     int aa = GFU.clamp255((int)(a * 255));
-    return aa << 24 | bb << 16 | gg << 8 | rr;
+    return aa << 24 | rr << 16 | gg << 8 | bb;
   }
   /** Make an int color from individual r/g/b/a values.
     *
@@ -59,54 +59,54 @@ public class Gfx
     g = GFU.clamp255(g);
     b = GFU.clamp255(b);
     a = GFU.clamp255(a);
-    return a << 24 | b << 16 | g << 8 | r;
+    return a << 24 | r << 16 | g << 8 | b;
   }
 
   /** Replace just the red portion of a color. */
   public static int replaceRed (int color, int red)
   {
-    //int rr = (color >>  0) & 0xff;
+    //int rr = (color >> 16) & 0xff;
     int gg = (color >>  8) & 0xff;
-    int bb = (color >> 16) & 0xff;
+    int bb = (color >>  0) & 0xff;
     int aa = (color >> 24) & 0xff;
     int rr = clamp255(red);
-    return aa << 24 | bb << 16 | gg << 8 | rr;
+    return aa << 24 | rr << 16 | gg << 8 | bb;
   }
   /** Replace just the green portion of a color. */
   public static int replaceGreen (int color, int green)
   {
-    int rr = (color >>  0) & 0xff;
+    int rr = (color >> 16) & 0xff;
     //int gg = (color >>  8) & 0xff;
-    int bb = (color >> 16) & 0xff;
+    int bb = (color >>  0) & 0xff;
     int aa = (color >> 24) & 0xff;
     int gg = clamp255(green);
-    return aa << 24 | bb << 16 | gg << 8 | rr;
+    return aa << 24 | rr << 16 | gg << 8 | bb;
   }
   /** Replace just the blue portion of a color. */
   public static int replaceBlue (int color, int blue)
   {
-    int rr = (color >>  0) & 0xff;
+    int rr = (color >>  16) & 0xff;
     int gg = (color >>  8) & 0xff;
-    //int bb = (color >> 16) & 0xff;
+    //int bb = (color >>  0) & 0xff;
     int aa = (color >> 24) & 0xff;
     int bb = clamp255(blue);
-    return aa << 24 | bb << 16 | gg << 8 | rr;
+    return aa << 24 | rr << 16 | gg << 8 | bb;
   }
   /** Replace just the alpha portion of a color. */
   public static int replaceAlpha (int color, int alpha)
   {
-    int rr = (color >>  0) & 0xff;
+    int rr = (color >> 16) & 0xff;
     int gg = (color >>  8) & 0xff;
-    int bb = (color >> 16) & 0xff;
+    int bb = (color >>  0) & 0xff;
     //int aa = (color >> 24) & 0xff;
     int aa = clamp255(alpha);
-    return aa << 24 | bb << 16 | gg << 8 | rr;
+    return aa << 24 | rr << 16 | gg << 8 | bb;
   }
 
   /** Get the red portion of a color. */
   public static int getRed (int color)
   {
-    return (color >> 0) & 0xff;
+    return (color >> 16) & 0xff;
   }
   /** Get the green portion of a color. */
   public static int getGreen (int color)
@@ -116,7 +116,7 @@ public class Gfx
   /** Get the blue portion of a color. */
   public static int getBlue (int color)
   {
-    return (color >> 16) & 0xff;
+    return (color >> 0) & 0xff;
   }
   /** Get the red portion of a color. */
   public static int getAlpha (int color)

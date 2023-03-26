@@ -285,9 +285,9 @@ flat in uint a_frag_tint;
 
 void main ()
 {
-  vec4 a_frag_tint2 = vec4( float((a_frag_tint >>  0) & uint(0xff))/255.0,
+  vec4 a_frag_tint2 = vec4( float((a_frag_tint >> 16) & uint(0xff))/255.0,
                             float((a_frag_tint >>  8) & uint(0xff))/255.0,
-                            float((a_frag_tint >> 16) & uint(0xff))/255.0,
+                            float((a_frag_tint >>  0) & uint(0xff))/255.0,
                             float((a_frag_tint >> 24) & uint(0xff))/255.0 );
   /**/ if (a_tunit == 0u) fragColor = texture(u_sampler0, v_tc).bgra * a_frag_tint2;
   else if (a_tunit == 1u) fragColor = texture(u_sampler1, v_tc).bgra * a_frag_tint2;
