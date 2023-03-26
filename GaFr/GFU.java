@@ -286,7 +286,7 @@ public class GFU
     */
   public static float scalef (float v, float a, float b)
   {
-    return v*(a-b)+a;
+    return v*(b-a)+a;
   }
 
   /** Scales a value into the range [a,b].
@@ -295,7 +295,7 @@ public class GFU
     */
   public static float scalef (double v, double a, double b)
   {
-    return (float)(v*(a-b)+a);
+    return (float)(v*(b-a)+a);
   }
 
   /** Scales a value into the range [a,b].
@@ -308,7 +308,7 @@ public class GFU
     */
   public static double scale (double v, double a, double b)
   {
-    return v*(a-b)+a;
+    return v*(b-a)+a;
   }
 
   /** Scales a value into the range [a,b].
@@ -317,7 +317,7 @@ public class GFU
     */
   public static float scale (float v, float a, float b)
   {
-    return v*(a-b)+a;
+    return v*(b-a)+a;
   }
 
 
