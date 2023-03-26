@@ -23,6 +23,11 @@ fonts: fonts/spleen/AUTHORS
 fonts2: $(FFONT_FONTS)
 
 
+dyn4j:
+	git clone https://github.com/dyn4j/dyn4j
+	rm dyn4j/src/main/java/module-info.java
+
+
 GaFr.jar: $(SOURCES) native/GaFr/GFN_native.js
 	@scons -Q
 
@@ -74,4 +79,4 @@ clean:
 
 .PHONY: cleanall
 cleanall: clean
-	@rm -rf doxygen-awesome-css doc fonts/spleen
+	@rm -rf doxygen-awesome-css doc fonts/spleen dyn4j
