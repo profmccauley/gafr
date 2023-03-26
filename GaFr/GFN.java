@@ -21,6 +21,7 @@ public class GFN
   public static native void gl_activeTexture (int i);
   public static native void gl_bindTexture (int i, GFTexture t);
   public static native void gl_texImage2D (int level, int internalFormat, int w, int h, int srcFormat, int pix[], int offset);
+  public static native void gl_generateMipmap (int i);
 
   public static native int gl_getUniformLocation (Gl.Program p, String name);
   public static native int gl_getAttributeLocation (Gl.Program p, String name);

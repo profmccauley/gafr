@@ -102,6 +102,18 @@ public class GFTexture
     GFN.gl_texImage2D(0, Gl.RGBA, img.width, img.height, Gl.RGBA, img.pix, 0);
   }
 
+  /** Generate mipmaps for this texture.
+    *
+    * This is required if you want to use mipmap min/mag filters.
+    */
+  public void generateMipmap ()
+  {
+    GFN.gl_activeTexture(Gl.TEXTURE0 + 7);
+    GFN.gl_bindTexture(Gl.TEXTURE_2D, this);
+
+    GFN.gl_generateMipmap(Gl.TEXTURE_2D);
+  }
+
   /// Internal use.
   protected void loadTexture (String fileName, int inColor, int outColor)
   {

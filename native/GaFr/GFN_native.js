@@ -49,6 +49,10 @@ function _CHEERPJ_COMPRESS(ZN4GaFr3GFN13gl_texImage2DEIIIIIAIIEV)(a0,a1,a2,a3,a4
                 gl.UNSIGNED_BYTE,
                 new Uint8Array(a5.buffer, (a6+1)*4)); /* +1 to skip cheerpj type info */
 }
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN17gl_generateMipmapEIEV)(a0,p)
+{
+  gl.generateMipmap(a0);
+}
 function _CHEERPJ_COMPRESS(ZN4GaFr3GFN21gl_getUniformLocationEN4GaFr10Gl$ProgramN4java4lang6StringEI)(a0,a1,p)
 {
   return gl.getUniformLocation(a0._gafrx_id, a1);
