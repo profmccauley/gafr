@@ -30,7 +30,7 @@ public class GFTexture
   public int wrapS = Gl.CLAMP_TO_EDGE;
   public int wrapT = Gl.CLAMP_TO_EDGE;
   public int minFilter = Gl.NEAREST;
-  public int maxFilter = Gl.NEAREST;
+  public int magFilter = Gl.NEAREST;
 
   /** Internal use */
   public int currentIndex = -1;
@@ -225,7 +225,7 @@ public class GFTexture
     GFN.gl_texParameteri(Gl.TEXTURE_2D, Gl.TEXTURE_WRAP_S, wrapS);
     GFN.gl_texParameteri(Gl.TEXTURE_2D, Gl.TEXTURE_WRAP_T, wrapT);
     GFN.gl_texParameteri(Gl.TEXTURE_2D, Gl.TEXTURE_MIN_FILTER, minFilter);
-    GFN.gl_texParameteri(Gl.TEXTURE_2D, Gl.TEXTURE_MAG_FILTER, maxFilter);
+    GFN.gl_texParameteri(Gl.TEXTURE_2D, Gl.TEXTURE_MAG_FILTER, magFilter);
     //GFU.log("activated texture ", currentIndex);
   }
 }
