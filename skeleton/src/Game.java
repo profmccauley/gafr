@@ -35,9 +35,11 @@ public class Game extends GFGame
     hue += 0.001;
     font.color = java.awt.Color.HSBtoRGB(hue, 1, 1);
 
+    // Bounce in the welcome message
     float p = GFU.unscaleClampf(frameCount/60f, 0, 3); // p goes from 0 to 1 in three seconds
-    p = Easings.easeOutBounce.easef(p);
-    font.draw(128+16,GFU.scalef(p, HEIGHT, 20), "Welcome to GaFr!");
+    float p2 = Easings.easeOutBounce.easef(p); // p2 "bounces" from 0 to 1
+    float ypos = GFU.scalef(p2, -30, HEIGHT-80); // bounce from -30 to HEIGHT-80
+    font.draw(128+16, ypos, "Welcome to GaFr!");
 
     logo.moveTo( (int)x, (int)y ).stamp();
     x += vx;
