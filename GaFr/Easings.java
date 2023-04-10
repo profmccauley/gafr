@@ -4,6 +4,35 @@ import java.util.ArrayList;
 /**
   * Easing functions.
   *
+  * An easing function is just a function for which the input is typically
+  * [0,1] and the output is slightly more interesting.  Usually ease(0) is
+  * 0 and ease(1) is 1, but in the middle it might be something else.  A
+  * typical use case for these functions is to map a linear input to
+  * something more exciting.  For example, if you use time as the input
+  * (linearly progressing as time passes), you can use the output to do
+  * something like compute a position... which does *not* move linearly.
+  * This is an easy way to add more interesting motion to a game, for
+  * example.
+  *
+  * GaFr provides an Easing superclass which easings can be derived from.
+  * As a consumer of an Easing, the functions you might be particularly
+  * interested in are Easing::ease() and Easing::easef() (for doubles and
+  * floats respectively).  You simply pass a value from 0 to 1 in, and get
+  * the eased value out.  The inputs are clamped to [0,1] automatically.
+  *
+  * GaFr comes with some flexible easings, and some utility classes for
+  * combining easings and such.  But perhaps most usefully, it comes with
+  * a bunch of "standard" easings already built into classes.  You can
+  * find nice demos of these easings on the website listed below; these
+  * demos can help you pick the easing function that does what you want.
+  * GaFr creates static instances of all of these "standard" easings for
+  * you, so you don't even need to instantiate anything -- you can just
+  * skip straight to using them.  For example:
+  *
+  * ```
+  * double easedValue = Easings.easeInOutElastic.ease( linearValue );
+  * ```
+  *
   * See https://easings.net/ nice graphs of these functions.  (That's also
   * where many of the functions came from.)
   */
