@@ -144,9 +144,7 @@ public class Easings
     }
     public float f (float x)
     {
-      if (x < 0) x = 0;
-      else if (x > 1) x = 1;
-      return e.f(1-x);
+      return 1-e.f(1-x);
     }
   }
 
@@ -162,7 +160,9 @@ public class Easings
     }
     public float f (float x)
     {
-      return e.f(x);
+      //if (x < 0) x = 0;
+      //else if (x > 1) x = 1;
+      return e.f(1-x);
     }
   }
 
