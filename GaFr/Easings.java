@@ -135,7 +135,7 @@ public class Easings
   /**
     * Inverts the output of an easing.
     */
-  public class Invert extends Easing
+  public static class Invert extends Easing
   {
     public Easing e;
     public Invert (Easing e)
@@ -153,7 +153,7 @@ public class Easings
   /**
     * Reverses the input of an easing.
     */
-  public class Reverse extends Easing
+  public static class Reverse extends Easing
   {
     public Easing e;
     public Reverse (Easing e)
