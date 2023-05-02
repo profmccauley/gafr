@@ -57,7 +57,7 @@ public class Easings
       if (x < 0) x = 0;
       else if (x > 1) x = 1;
       if (x <= 0.5) return e1.f(x*2);
-      return e2.f(x-0.5f);
+      return e2.f((x-0.5f)*2);
     }
   }
 
