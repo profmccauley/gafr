@@ -432,7 +432,8 @@ public class Easings
     public static float n1 = 7.5625f;
     public static float d1 = 2.75f;
 
-    protected float f2 (float x) // This is just EaseOutBounce
+    // This is just the EaseOutBounce code
+    protected float f2 (float x)
     {
       if (x < 1 / d1) {
           return n1 * x * x;
