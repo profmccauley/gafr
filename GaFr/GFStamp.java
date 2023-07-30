@@ -39,6 +39,9 @@ public class GFStamp
   public float x; ///< The current image location.
   public float y; ///< The current image location.
 
+  protected boolean flippedX; ///< Whether image is currently flipped along X.
+  protected boolean flippedY; ///< Whether image is currently flipped along Y.
+
   /** The current rotation in radians. */
   public float angle;
 
@@ -224,6 +227,68 @@ public class GFStamp
   {
     pinX = x/width;
     pinY = y/height;
+    return this;
+  }
+
+  /** Flip the image. */
+  public GFStamp flip (boolean x, boolean y)
+  {
+    if (x) flipX();
+    if (y) flipY();
+    return this;
+  }
+
+  /** Set the flippedness of the image. */
+  public GFStamp setFlipX (boolean x)
+  {
+    if (flippedX != x) flipX();
+    return this;
+  }
+
+  /** Set the flippedness of the image. */
+  public GFStamp setFlipY (boolean y)
+  {
+    if (flippedY != y) flipY();
+    return this;
+  }
+
+  /** Checks whether we are flipping along X. */
+  public boolean getFlipX ()
+  {
+    return flippedX;
+  }
+
+  /** Checks whether we are flipping along Y. */
+  public boolean getFlipY ()
+  {
+    return flippedY;
+  }
+
+  /** Set the flippedness of the image. */
+  public GFStamp setFlip (boolean x, boolean y)
+  {
+    setFlipX(x);
+    setFlipY(y);
+    return this;
+  }
+
+  /** Flip the on the X axis. */
+  public GFStamp flipX ()
+  {
+    float t = u0;
+    u0 = u1;
+    u1 = t;
+    flippedX = !flippedX;
+    return this;
+  }
+
+  /** Flip the on the Y axis. */
+  public GFStamp flipY ()
+  {
+    float t = v0;
+    v0 = v1;
+    v1 = t;
+    flippedY = !flippedY;
     return this;
   }
 
