@@ -606,4 +606,27 @@ public class GFU
     return substr(s, start, -1);
   }
 
+  /** Split a string at the first occurrence.
+    *
+    * If the delimiter does not appear in the string, the second item of the
+    * pair is null.
+    */
+  public static GFPair<String, String> split (String string, String delim)
+  {
+    int n = string.indexOf(delim);
+    if (n == -1) return new GFPair<>(string, null);
+    return new GFPair<>(substr(string, 0,n), substr(string, n+1));
+  }
+
+  /** Split a string at the last occurrence.
+    *
+    * If the delimiter does not appear in the string, the first item of the
+    * pair is null.
+    */
+  public static GFPair<String, String> rsplit (String string, String delim)
+  {
+    int n = string.lastIndexOf(delim);
+    if (n == -1) return new GFPair<>(string, null);
+    return new GFPair<>(substr(string, 0,n), substr(string, n+1));
+  }
 }
