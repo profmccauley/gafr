@@ -62,15 +62,24 @@ public class GFBoot
 
   public static void onMouseMove (int x, int y, int buttons, int flags)
   {
+    GFMouse.x = x;
+    GFMouse.y = y;
+    GFMouse.buttons = buttons;
     if (game!=null) game.onMouseMove(x,y,buttons,flags);
     //System.out.println("Java: onMouseMove("+x+","+y+","+buttons+","+flags+")");
   }
   public static void onMouseDown (int x, int y, int buttons, int flags, int button)
   {
+    GFMouse.x = x;
+    GFMouse.y = y;
+    GFMouse.buttons = buttons;
     if (game!=null) game.onMouseDown(x,y,buttons,flags,button);
   }
   public static void onMouseUp (int x, int y, int buttons, int flags, int button)
   {
+    GFMouse.x = x;
+    GFMouse.y = y;
+    GFMouse.buttons = buttons;
     if (game!=null) game.onMouseUp(x,y,buttons,flags,button);
   }
 
