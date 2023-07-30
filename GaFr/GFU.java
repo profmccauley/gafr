@@ -580,4 +580,30 @@ public class GFU
       return count > 0;
     }
   }
+  /** Gets a substring using Python-like indices.
+    */
+  public static String substr (String s, int start, int end)
+  {
+    if (s == null) return "";
+
+    int len = s.length();
+    if (start < 0) start = len + start;
+    if (end < 0) end = len + end;
+
+    if (start < 0) start = 0;
+    if (end < 0) end = 0;
+
+    if (start >= len) start = len;
+    if (end >= len) end = len;
+
+    return s.substring(start, end);
+  }
+
+  /** Gets a substring using Python-like indices.
+    */
+  public static String substr (String s, int start)
+  {
+    return substr(s, start, -1);
+  }
+
 }
