@@ -227,6 +227,22 @@ public class GFTexture
     return splitIntoTilesBySize(sizeX, sizeY, 0, 0, 0, 0);
   }
 
+  /** Creates a stamp based on a region of this texture.
+    */
+  public GFStamp subStamp (int x, int y, int w, int h)
+  {
+    GFStamp s = new GFStamp(this);
+    s.u0 = x / (float)width;
+    s.v0 = y / (float)height;
+    s.u1 = s.u0 + w / (float)width;
+    s.v1 = s.v0 + h / (float)height;
+    s.width = w;
+    s.height = h;
+    s.origWidth = w;
+    s.origHeight = h;
+    return s;
+  }
+
   /** Internal use */
   public void activateTexture ()
   {
