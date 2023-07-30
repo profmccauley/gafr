@@ -146,6 +146,15 @@ public class GFStamp
     return this;
   }
 
+  /** Adjusts the color.
+    *
+    * See the class description for more.
+    */
+  public GFStamp recolor (double r, double g, double b, double a)
+  {
+    return recolor(Gfx.makeColor(r,g,b,a));
+  }
+
   /** Set the position.
     */
   public GFStamp moveTo (float x, float y)
