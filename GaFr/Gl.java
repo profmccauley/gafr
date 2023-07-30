@@ -561,6 +561,25 @@ public class Gl
   public static final int TIMEOUT_IGNORED = -1;
   public static final int MAX_CLIENT_WAIT_TIMEOUT_WEBGL = 37447;
 
+  /** Checks if a given filter mode uses mipmaps.
+    *
+    * Given a filter mode, returns true if it uses mipmaps and false
+    * otherwise.  For example, passing LINEAR returns false, and
+    * passing NEAREST_MIPMAP_NEAREST returns true.
+    */
+  boolean isMipmapFilter (int filter)
+  {
+    switch (filter)
+    {
+      case NEAREST_MIPMAP_NEAREST:
+      case LINEAR_MIPMAP_NEAREST:
+      case NEAREST_MIPMAP_LINEAR:
+      case LINEAR_MIPMAP_LINEAR:
+        return true;
+    }
+    return false;
+  }
+
   /** A shader program. */
   public static class Program
   {
