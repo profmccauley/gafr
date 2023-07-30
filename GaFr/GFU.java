@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.util.Random;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 /** A utility library for odds and ends.
   *
@@ -580,6 +581,24 @@ public class GFU
       return count > 0;
     }
   }
+
+  /** Makes an ArrayList at least a given length.
+    */
+  public static void ensureSize (ArrayList<?> list, int size)
+  {
+    list.ensureCapacity(size);
+    while (list.size() < size)
+      list.add(null);
+  }
+
+  /** Makes an ArrayList large enough for the given index.
+    */
+  public static void ensureIndex (ArrayList<?> list, int index)
+  {
+    ensureSize(list, index+1);
+  }
+
+
   /** Gets a substring using Python-like indices.
     */
   public static String substr (String s, int start, int end)
