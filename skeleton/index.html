@@ -58,7 +58,9 @@ canvas
   async function do_reload_check ()
   {
     setTimeout(do_reload_check, 1000);
-    const url = "Game.jar.js";
+    var url = "Game.jar.js";
+    if (gafr_isDebugOn())
+      url = "debug/" + url;
     const ac = new AbortController();
     const t = setTimeout(() => ac.abort(), 500);
     const response = await fetch(url, {method: 'HEAD', signal: ac.signal});
