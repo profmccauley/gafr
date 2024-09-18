@@ -18,7 +18,7 @@ import static GaFr.GFU.*;
   * a color on the stamp; each channel (red, green, blue, and alpha) of
   * the given color are multiplied against the texture color.  This lets
   * you tint images to a degree.  Perhaps more interestingly, you can
-  * set the alpha channel to made the image partially transparent.
+  * set the alpha channel to make the image partially transparent.
   */
 public class GFStamp
 {
