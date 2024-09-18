@@ -26,10 +26,11 @@ public class GFBoot
     {
       Class<?> cls = Class.forName(clsname);
       game = (GFGame)cls.getDeclaredConstructor().newInstance();
+      game.onStartup();
     }
     catch (Exception e)
     {
-      GFST.printStackTrace(e, "Exception instantiating main class " + clsname);
+      GFST.printStackTrace(e, "Exception instantiating/initializing main class " + clsname);
       throw new RuntimeException(e);
     }
 
