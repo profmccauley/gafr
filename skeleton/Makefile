@@ -23,7 +23,7 @@ debug/Game.jar.js: debug/Game.jar
 	@cheerpjfy debug/Game.jar --deps=gafr/debug/GaFr.jar
 
 .PHONY: debug
-debug: gafr/debug/GaFr.jar.js debug/Game.jar.js
+debug: Game.jar.js gafr/debug/GaFr.jar.js debug/Game.jar.js
 
 gafr/debug/GaFr.jar.js: gafr
 	@cd gafr && make debug
