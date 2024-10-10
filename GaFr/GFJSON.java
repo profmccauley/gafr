@@ -90,7 +90,7 @@ public class GFJSON
   }
 
   /** Superclass for all JSON values. */
-  static class Value
+  public static class Value
   {
     /** Is this Value a null? */
     public boolean isNull () { return false; }
