@@ -494,7 +494,7 @@ public class GFJSON
     switch (front())
     {
       case '{':
-        ++cur;
+        //++cur;
         return parseObject();
       case '[':
         ++cur;
