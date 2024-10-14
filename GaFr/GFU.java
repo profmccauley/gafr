@@ -449,6 +449,12 @@ public class GFU
   /** The value of PI as a float. */
   public static final float PIf = (float)Math.PI;
 
+  /** The value of TAU. */
+  public static final double TAU = Math.PI*2;
+  /** The value of TAU as a float. */
+  public static final float TAUf = (float)(Math.PI*2);
+
+
   /** The substring before the last instance of a delimiter.
     *
     *     beforeLast("foo.bar.baz", ".") == "foo.bar"
