@@ -116,6 +116,30 @@ public class GFM
   {
     return wrapf(v, 0, 2*PIf);
   }
+  /** Wraps value into the range [0,2pi).
+    *
+    * @see GFU#wraprad(float)
+    */
+  public static double wraprad (double v)
+  {
+    return wrapf(v, 0, 2*PI);
+  }
+  /** Wraps value into the range (-pi, pi].
+    *
+    * @see GFU#wraprad(float)
+    */
+  public static float wrappi (float v)
+  {
+    return -wrapf(-v, -PIf, PIf);
+  }
+  /** Wraps value into the range (-pi, pi].
+    *
+    * @see GFU#wrappi(float)
+    */
+  public static double wrappi (double v)
+  {
+    return -wrapf(-v, -PI, PI);
+  }
 
   /** Wraps value into a range.
     *
