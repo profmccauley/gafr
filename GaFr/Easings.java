@@ -1,5 +1,6 @@
 package GaFr;
 import java.util.ArrayList;
+import static GaFr.GFM.*;
 
 /**
   * Easing functions.
@@ -208,17 +209,17 @@ public class Easings
 
   public static class EaseInSine extends Easing
   {
-    public float f (float x) { return 1 - GFU.cosf((x * GFU.PIf) / 2); }
+    public float f (float x) { return 1 - cosf((x * PIf) / 2); }
   }
 
   public static class EaseOutSine extends Easing
   {
-    public float f (float x) { return GFU.sinf((x * GFU.PIf) / 2); }
+    public float f (float x) { return sinf((x * PIf) / 2); }
   }
 
   public static class EaseInOutSine extends Easing
   {
-    public float f (float x) { return -(GFU.cosf(GFU.PIf * x) - 1) / 2; }
+    public float f (float x) { return -(cosf(PIf * x) - 1) / 2; }
   }
 
   public static class EaseInQuad extends Easing
@@ -233,7 +234,7 @@ public class Easings
 
   public static class EaseInOutQuad extends Easing
   {
-    public float f (float x) { return x < 0.5 ? 2 * x * x : 1 - GFU.powf(-2 * x + 2, 2) / 2; }
+    public float f (float x) { return x < 0.5 ? 2 * x * x : 1 - powf(-2 * x + 2, 2) / 2; }
   }
 
   public static class EaseInCubic extends Easing
@@ -243,12 +244,12 @@ public class Easings
 
   public static class EaseOutCubic extends Easing
   {
-    public float f (float x) { return 1 - GFU.powf(1 - x, 3); }
+    public float f (float x) { return 1 - powf(1 - x, 3); }
   }
 
   public static class EaseInOutCubic extends Easing
   {
-    public float f (float x) { return x < 0.5 ? 4 * x * x * x : 1 - GFU.powf(-2 * x + 2, 3) / 2; }
+    public float f (float x) { return x < 0.5 ? 4 * x * x * x : 1 - powf(-2 * x + 2, 3) / 2; }
   }
 
   public static class EaseInQuart extends Easing
@@ -258,12 +259,12 @@ public class Easings
 
   public static class EaseOutQuart extends Easing
   {
-    public float f (float x) { return 1 - GFU.powf(1 - x, 4); }
+    public float f (float x) { return 1 - powf(1 - x, 4); }
   }
 
   public static class EaseInOutQuart extends Easing
   {
-    public float f (float x) { return x < 0.5 ? 8 * x * x * x * x : 1 - GFU.powf(-2 * x + 2, 4) / 2; }
+    public float f (float x) { return x < 0.5 ? 8 * x * x * x * x : 1 - powf(-2 * x + 2, 4) / 2; }
   }
 
   public static class EaseInQuint extends Easing
@@ -273,22 +274,22 @@ public class Easings
 
   public static class EaseOutQuint extends Easing
   {
-    public float f (float x) { return 1 - GFU.powf(1 - x, 5); }
+    public float f (float x) { return 1 - powf(1 - x, 5); }
   }
 
   public static class EaseInOutQuint extends Easing
   {
-    public float f (float x) { return x < 0.5 ? 16 * x * x * x * x * x : 1 - GFU.powf(-2 * x + 2, 5) / 2; }
+    public float f (float x) { return x < 0.5 ? 16 * x * x * x * x * x : 1 - powf(-2 * x + 2, 5) / 2; }
   }
 
   public static class EaseInExpo extends Easing
   {
-    public float f (float x) { return x == 0 ? 0 : GFU.powf(2, 10 * x - 10); }
+    public float f (float x) { return x == 0 ? 0 : powf(2, 10 * x - 10); }
   }
 
   public static class EaseOutExpo extends Easing
   {
-    public float f (float x) { return x == 1 ? 1 : 1 - GFU.powf(2, -10 * x); }
+    public float f (float x) { return x == 1 ? 1 : 1 - powf(2, -10 * x); }
   }
 
   public static class EaseInOutExpo extends Easing
@@ -299,19 +300,19 @@ public class Easings
         ? 0
         : x == 1
         ? 1
-        : x < 0.5 ? GFU.powf(2, 20 * x - 10) / 2
-        : (2 - GFU.powf(2, -20 * x + 10)) / 2;
+        : x < 0.5 ? powf(2, 20 * x - 10) / 2
+        : (2 - powf(2, -20 * x + 10)) / 2;
     }
   }
 
   public static class EaseInCirc extends Easing
   {
-    public float f (float x) { return 1 - GFU.sqrtf(1 - GFU.powf(x, 2)); }
+    public float f (float x) { return 1 - sqrtf(1 - powf(x, 2)); }
   }
 
   public static class EaseOutCirc extends Easing
   {
-    public float f (float x) { return GFU.sqrtf(1 - GFU.powf(x - 1, 2)); }
+    public float f (float x) { return sqrtf(1 - powf(x - 1, 2)); }
   }
 
   public static class EaseInOutCirc extends Easing
@@ -319,8 +320,8 @@ public class Easings
     public float f (float x)
     {
       return x < 0.5
-        ? (1 - GFU.sqrtf(1 - GFU.powf(2 * x, 2))) / 2
-        : (GFU.sqrtf(1 - GFU.powf(-2 * x + 2, 2)) + 1) / 2;
+        ? (1 - sqrtf(1 - powf(2 * x, 2))) / 2
+        : (sqrtf(1 - powf(-2 * x + 2, 2)) + 1) / 2;
     }
   }
 
@@ -342,7 +343,7 @@ public class Easings
 
     public float f (float x)
     {
-      return 1 + c3 * GFU.powf(x - 1, 3) + c1 * GFU.powf(x - 1, 2);
+      return 1 + c3 * powf(x - 1, 3) + c1 * powf(x - 1, 2);
     }
   }
 
@@ -354,14 +355,14 @@ public class Easings
     public float f (float x)
     {
       return x < 0.5
-        ? (GFU.powf(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
-        : (GFU.powf(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
+        ? (powf(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+        : (powf(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
     }
   }
 
   public static class EaseInElastic extends Easing
   {
-    public float c4 = (2 * GFU.PIf) / 3f;
+    public float c4 = (2 * PIf) / 3f;
 
     public float f (float x)
     {
@@ -369,13 +370,13 @@ public class Easings
         ? 0
         : x == 1
         ? 1
-        : -GFU.powf(2, 10 * x - 10) * GFU.sinf((x * 10 - 10.75) * c4);
+        : -powf(2, 10 * x - 10) * sinf((x * 10 - 10.75) * c4);
     }
   }
 
   public static class EaseOutElastic extends Easing
   {
-    public float c4 = (2 * GFU.PIf) / 3f;
+    public float c4 = (2 * PIf) / 3f;
 
     public float f (float x)
     {
@@ -383,13 +384,13 @@ public class Easings
         ? 0
         : x == 1
         ? 1
-        : GFU.powf(2, -10 * x) * GFU.sinf((x * 10 - 0.75) * c4) + 1;
+        : powf(2, -10 * x) * sinf((x * 10 - 0.75) * c4) + 1;
     }
   }
 
   public static class EaseInOutElastic extends Easing
   {
-    public float c5 = (2 * GFU.PIf) / 4.5f;
+    public float c5 = (2 * PIf) / 4.5f;
 
     public float f (float x)
     {
@@ -398,8 +399,8 @@ public class Easings
         : x == 1
         ? 1
         : x < 0.5
-        ? -(GFU.powf(2, 20 * x - 10) * GFU.sinf((20 * x - 11.125f) * c5)) / 2
-        : (GFU.powf(2, -20 * x + 10) * GFU.sinf((20 * x - 11.125f) * c5)) / 2 + 1;
+        ? -(powf(2, 20 * x - 10) * sinf((20 * x - 11.125f) * c5)) / 2
+        : (powf(2, -20 * x + 10) * sinf((20 * x - 11.125f) * c5)) / 2 + 1;
     }
   }
 

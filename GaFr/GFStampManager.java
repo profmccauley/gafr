@@ -1,4 +1,5 @@
 package GaFr;
+import static GaFr.GFM.*;
 
 /** Internal use.
   *
@@ -88,8 +89,8 @@ class GFStampManager
     }
     else
     {
-      vinfo[off + 6] = GFU.sinf(stamp.angle);
-      vinfo[off + 7] = GFU.cosf(stamp.angle);
+      vinfo[off + 6] = sinf(stamp.angle);
+      vinfo[off + 7] = cosf(stamp.angle);
     }
 
     tcs[nextIndex * 4 + 0] = stamp.u0;

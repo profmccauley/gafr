@@ -1,5 +1,6 @@
 package GaFr;
 import static GaFr.GFU.*;
+import static GaFr.GFM.*;
 
 /** Stuff for graphics. */
 public class Gfx
@@ -43,10 +44,10 @@ public class Gfx
     */
   public static int makeColor (double r, double g, double b, double a)
   {
-    int rr = GFU.clamp255((int)(r * 255));
-    int gg = GFU.clamp255((int)(g * 255));
-    int bb = GFU.clamp255((int)(b * 255));
-    int aa = GFU.clamp255((int)(a * 255));
+    int rr = clamp255((int)(r * 255));
+    int gg = clamp255((int)(g * 255));
+    int bb = clamp255((int)(b * 255));
+    int aa = clamp255((int)(a * 255));
     return aa << 24 | rr << 16 | gg << 8 | bb;
   }
   /** Make an int color from individual r/g/b/a values.
@@ -55,10 +56,10 @@ public class Gfx
     */
   public static int makeColor (int r, int g, int b, int a)
   {
-    r = GFU.clamp255(r);
-    g = GFU.clamp255(g);
-    b = GFU.clamp255(b);
-    a = GFU.clamp255(a);
+    r = clamp255(r);
+    g = clamp255(g);
+    b = clamp255(b);
+    a = clamp255(a);
     return a << 24 | r << 16 | g << 8 | b;
   }
 

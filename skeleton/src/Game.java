@@ -3,6 +3,7 @@ import GaFr.GFStamp;
 import GaFr.GFFont;
 import GaFr.Gfx;
 import GaFr.GFU;
+import GaFr.GFM;
 import GaFr.Easings;
 
 public class Game extends GFGame
@@ -36,9 +37,9 @@ public class Game extends GFGame
     font.color = java.awt.Color.HSBtoRGB(hue, 1, 1);
 
     // Bounce in the welcome message
-    float p = GFU.unscaleClampf(frameCount/60f, 0, 3); // p goes from 0 to 1 in three seconds
+    float p = GFM.unscaleClampf(frameCount/60f, 0, 3); // p goes from 0 to 1 in three seconds
     float p2 = Easings.easeOutBounce.easef(p); // p2 "bounces" from 0 to 1
-    float ypos = GFU.scalef(p2, -30, HEIGHT-80); // bounce from -30 to HEIGHT-80
+    float ypos = GFM.scalef(p2, -30, HEIGHT-80); // bounce from -30 to HEIGHT-80
     font.draw(128+16, ypos, "Welcome to GaFr!");
 
     logo.moveTo( (int)x, (int)y ).stamp();

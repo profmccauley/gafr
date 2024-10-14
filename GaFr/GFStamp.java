@@ -1,5 +1,6 @@
 package GaFr;
 import static GaFr.GFU.*;
+import static GaFr.GFM.*;
 
 /** An image which can be drawn to the screen.
   *
@@ -53,7 +54,7 @@ public class GFStamp
     */
   public GFStamp setAlpha (double v)
   {
-    color = Gfx.replaceAlpha(color, GFU.clamp255(v*255));
+    color = Gfx.replaceAlpha(color, clamp255(v*255));
     return this;
   }
 
@@ -191,7 +192,7 @@ public class GFStamp
     */
   public GFStamp fixAngleN ()
   {
-    this.angle = GFU.wrapf(this.angle, -PIf, PIf);
+    this.angle = wrapf(this.angle, -PIf, PIf);
     return this;
   }
   /** Fix the angle range to [0,2PI).
@@ -204,7 +205,7 @@ public class GFStamp
     */
   public GFStamp fixAngle ()
   {
-    this.angle = GFU.wrapf(this.angle, 0, 2*PIf);
+    this.angle = wrapf(this.angle, 0, 2*PIf);
     return this;
   }
 
