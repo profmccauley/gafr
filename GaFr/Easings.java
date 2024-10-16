@@ -486,11 +486,68 @@ public class Easings
     }
   }
 
+  /**
+    * A square waveform "easing".
+    *
+    * This jumps from 0 to 1 half way through.
+    */
   public static class Square extends Easing
   {
     public float f (float x)
     {
       if (x > 0.5) return 1;
+      return 0;
+    }
+  }
+
+  /**
+    * A triangle waveform "easing".
+    *
+    * This goes from 0 to 1 and back to 0.
+    */
+  public static class Triangle extends Easing
+  {
+    public float f (float x)
+    {
+      return 1f - (Math.abs(x - 0.5f) * 2);
+    }
+  }
+
+  /**
+    * A sine wave "easing".
+    *
+    * A complete sinusoidal waveform from 0 to 1 to 0.
+    */
+  public static class Sine extends Easing
+  {
+    public float f (float x)
+    {
+      return (sinf(x * TAUf - PIf/2f) + 1) / 2;
+    }
+  }
+
+  /**
+    * A generic pulse wave "easing".
+    *
+    * A pulse wave is a generalization of a square wave.  When the duty cycle
+    * is 0.5, it *is* a square wave -- half the time is spent at 0 and half
+    * is spent at 1.  In general, the duty cycle is the fraction of time
+    * which the output is 1.
+    */
+  public static class Pulse extends Easing
+  {
+    protected float anti_duty;
+    public Pulse (double duty)
+    {
+      this( (float)duty );
+    }
+    public Pulse (float duty)
+    {
+      anti_duty = 1 - duty;
+    }
+    public float f (float x)
+    {
+      if (x >= anti_duty) return 1;
       return 0;
     }
   }
@@ -530,4 +587,9 @@ public class Easings
   public static Constant0 constant0 = new Constant0();
   public static Constant1 constant1 = new Constant1();
   public static Square square = new Square();
+
+  public static Sine sineWave = new Sine();
+  public static Triangle triangleWave = new Triangle();
+  public static Square squareWave = square;
+  public static EaseLinear sawWave = easeLinear;
 }
