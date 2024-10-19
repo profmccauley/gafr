@@ -145,7 +145,7 @@ public class Easings
     }
     public float f (float x)
     {
-      return 1-e.f(1-x);
+      return 1-e.f(x);
     }
   }
 
