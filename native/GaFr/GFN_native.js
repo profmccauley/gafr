@@ -141,3 +141,17 @@ function _CHEERPJ_COMPRESS(ZN4GaFr3GFN15gl_getParameterEIEI)(a0,p)
 {
   return gl.getParameter(a0);
 }
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN14eventToBrowserEIIN4java4lang6StringN4java4lang6StringEI)(a0,a1,a2,a3,p)
+{
+  if (!window.onEventFromGaFr) return 0;
+  a2 = a2 ? cjStringJavaToJs(a2) : "";
+  a3 = a3 ? cjStringJavaToJs(a3) : "";
+  return window.onEventFromGaFr(a0,a1,a2,a3) || 0;
+}
+function _CHEERPJ_COMPRESS(ZN4GaFr3GFN17eventToBrowserStrEIIN4java4lang6StringN4java4lang6StringEN4java4lang6String)(a0,a1,a2,a3,p)
+{
+  if (!window.onEventFromGaFrStr) return null;
+  a2 = a2 ? cjStringJavaToJs(a2) : "";
+  a3 = a3 ? cjStringJavaToJs(a3) : "";
+  return window.onEventFromGaFrStr(a0,a1,a2,a3) || null;
+}

@@ -138,4 +138,26 @@ public class GFGame
   public void onDraw (int frameCount)
   {
   }
+
+  /** Invoked by user-provided JavaScript.
+    *
+    * It can be useful to integrate functionality written in JavaScript with
+    * GaFr.  As one example, one might wish to use HTML form elements (like a
+    * text field) to provide input to GaFr.  While one could extend GaFr by
+    * adding native methods specifically for a particular use, this method
+    * is an attempt to provide a generic bridge.  From JavaScript, one can
+    * just call gafrj_eventToGaFr() and pass some data; this method is then
+    * called, and the game can interpret it however it desires -- without
+    * needing to modify GaFr itself.
+    *
+    * With much the same rationale, GaFr developers can call either
+    * GFN.eventToBrowser() or GFN.eventToBrowserStr() from Java, which will
+    * call onEventFromGaFr() or onEventFromGaFrStr() JavaScript functions.
+    */
+  public int onEventFromBrowser (int i0, int i1, float f0, float f1,
+                                  String s0, String s1)
+  {
+    GFU.logs("Unhandled onEventFromBrowser:", i0, i1, f0, f1, s0, s1);
+    return -1;
+  }
 }

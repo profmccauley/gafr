@@ -84,6 +84,13 @@ public class GFBoot
     if (game!=null) game.onMouseUp(x,y,buttons,flags,button);
   }
 
+  public static int onEventFromBrowser (int i0, int i1, float f0, float f1,
+                                         String s0, String s1)
+  {
+    if (game == null) return 0;
+    return game.onEventFromBrowser(i0, i1, f0, f1, s0, s1);
+  }
+
   public static void onDraw ()
   {
     //System.out.println("Java: draw()");

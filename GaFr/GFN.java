@@ -50,4 +50,7 @@ public class GFN
 
   public static native void setTitle (String s);
   public static native void setCursorStyle (String s);
+
+  public static native int eventToBrowser (int n0, int n1, String s0, String s1);
+  public static native String eventToBrowserStr (int n0, int n1, String s0, String s1);
 }

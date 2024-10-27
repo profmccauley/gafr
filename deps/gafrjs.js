@@ -71,6 +71,7 @@ var gafrj_onKeyUp = gafr_null;
 var gafrj_onMouseMove = gafr_null;
 var gafrj_onMouseDown = gafr_null;
 var gafrj_onMouseUp = gafr_null;
+var gafrj_eventToGaFr = gafr_null;
 
 function gafr_getModFlags (ev)
 {
@@ -163,6 +164,7 @@ async function gafr_jsInit (width, height)
   gafrj_onMouseMove = await cjResolveCall("GaFr.GFBoot", "onMouseMove", null);
   gafrj_onMouseDown = await cjResolveCall("GaFr.GFBoot", "onMouseDown", null);
   gafrj_onMouseUp   = await cjResolveCall("GaFr.GFBoot", "onMouseUp",   null);
+  gafrj_eventToGaFr = await cjResolveCall("GaFr.GFBoot", "onEventFromBrowser",null);
 
   const c = glcanv;//document.querySelector("#canvas");
   //c.addEventListener('mousemove', gafr_onMouseMove);
