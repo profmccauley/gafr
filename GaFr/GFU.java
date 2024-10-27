@@ -57,6 +57,7 @@ public class GFU
     for (Object o : args)
     {
       //if (s.length() != 0) s += " ";
+      if (o == null) o = "<null>";
       s += o.toString();
     }
     System.out.print(s);
@@ -74,6 +75,7 @@ public class GFU
     for (Object o : args)
     {
       if (s.length() != 0) s += " ";
+      if (o == null) o = "<null>";
       s += o.toString();
     }
     System.out.print(s);
