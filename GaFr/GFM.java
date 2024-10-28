@@ -422,6 +422,18 @@ public class GFM
     return random.nextInt(hi-lo+1) + lo;
   }
 
+  /** Returns a random item from a list.  */
+  public static <C> C rand (java.util.List<C> objects)
+  {
+    return objects.get(randint(0, objects.size()-1));
+  }
+
+  /** Returns a random item from a list.  */
+  public static <C> C rand (C[] objects)
+  {
+    return objects[randint(0, objects.length-1)];
+  }
+
   /** Returns a random number.
    *
    * @param lo     The lower bound
