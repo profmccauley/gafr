@@ -597,7 +597,7 @@ public class GFFont
     */
   public GFFont collapseCase ()
   {
-    for (char l = 'A'; l < 'Z'; ++l)
+    for (char l = 'A'; l <= 'Z'; ++l)
     {
       char u = (char)(l + 32);
       if (getGlyphNR(l) == null) setGlyph(l, getGlyph(u));
